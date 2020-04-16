@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D09707582448FB5200FE39BD /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09707572448FB5200FE39BD /* Result.swift */; };
+		D097075A2448FFE200FE39BD /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09707592448FFE200FE39BD /* APIClient.swift */; };
 		D0F78B6124385BD200213881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F78B6024385BD200213881 /* AppDelegate.swift */; };
 		D0F78B6324385BD200213881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F78B6224385BD200213881 /* SceneDelegate.swift */; };
 		D0F78B6524385BD200213881 /* MovieGenresController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F78B6424385BD200213881 /* MovieGenresController.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		D09707572448FB5200FE39BD /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		D09707592448FFE200FE39BD /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		D0F78B5D24385BD200213881 /* Movie-Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie-Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F78B6024385BD200213881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F78B6224385BD200213881 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				D0F78B89244134CD00213881 /* Endpoint.swift */,
 				D09707572448FB5200FE39BD /* Result.swift */,
+				D09707592448FFE200FE39BD /* APIClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				D0F78B77243E7E6600213881 /* MovieGenresView.swift in Sources */,
 				D0F78B81243E9F9500213881 /* Genre.swift in Sources */,
 				D09707582448FB5200FE39BD /* Result.swift in Sources */,
+				D097075A2448FFE200FE39BD /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
