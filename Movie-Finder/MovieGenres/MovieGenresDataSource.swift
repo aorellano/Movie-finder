@@ -19,7 +19,7 @@ extension MovieGenresDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! MovieGenreCell
-        cell.textLabel?.text = genres?[indexPath.row].title
+        cell.textLabel?.text = genres?[indexPath.row].name
         return cell
     }
 }

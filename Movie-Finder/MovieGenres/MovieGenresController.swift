@@ -12,14 +12,24 @@ class MovieGenresController: UIViewController {
     let movieGenresView = MovieGenresView()
     let dataSource = MovieGenresDataSource()
     var tableViewTouchesCount = 0
+    let client = MovieClient()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         movieGenresView.genresTableView.dataSource = dataSource
         movieGenresView.genresTableView.delegate = self
         
-        let endpoint = Movie.subGenre(term: "Action")
-        print(endpoint.request)
+        client.getGenres(from: .genre){ result in
+            switch result {
+            case .success(let genreResults):
+                guard let genres = genreResults.genres else { return }
+                print(genres)
+            case .failure(let error):
+                print("the error \(error)")
+            }
+        }
+            
     }
     
     override func viewWillAppear(_ animated: Bool) {

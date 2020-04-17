@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 enum APIError: Error {
     case requestFailed
     case jsonConversionFailure
@@ -29,14 +28,14 @@ enum APIError: Error {
 
 protocol APIClient {
     var session: URLSession { get }
+    
+    func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, APIError>) -> Void)
 }
 
 extension APIClient {
-    typealias JSON = [String: AnyObject]
-    typealias JSONTaskCompletionHandler = (JSON?, APIError?) -> Void
+    typealias JSONTaskCompletionHandler = (Decodable?, APIError?) -> Void
     
-    func jsonTask(with request: URLRequest, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
-        
+    func jsonTask<T: Decodable>(with request: URLRequest, decodingType: T.Type, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
             
             guard let httpResponse = response as? HTTPURLResponse else {
@@ -47,8 +46,8 @@ extension APIClient {
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
-                        completion(json, nil)
+                        let genericModel = try JSONDecoder().decode(decodingType, from: data)
+                        completion(genericModel, nil)
                     } catch {
                         completion(nil, .jsonConversionFailure)
                     }
@@ -59,6 +58,32 @@ extension APIClient {
                 completion(nil, .responseUnsuccessful)
             }
         }
+        
         return task
+    }
+    
+    func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, APIError>) -> Void) {
+        
+        let task = jsonTask(with: request, decodingType: T.self) { json, error in
+            
+            DispatchQueue.main.async {
+                guard let json = json else {
+                    if let error = error {
+                        completion(Result.failure(error))
+                    } else {
+                        completion(Result.failure(.invalidData))
+                    }
+                    
+                    return
+                }
+                
+                if let value = decode(json) {
+                    completion(.success(value))
+                } else {
+                    completion(.failure(.jsonParsingFailure))
+                }
+            }
+        }
+        task.resume()
     }
 }

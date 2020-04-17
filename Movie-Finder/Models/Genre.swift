@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Genre {
-    var title: String
+struct Genre: Decodable {
+    var name: String
     var id: Int
 }
