@@ -2,12 +2,13 @@
 //  GenreList.swift
 //  Movie-Finder
 //
-//  Created by Alexis Orellano on 4/16/20.
+//  Created by Alexis Orellano on 4/27/20.
 //  Copyright © 2020 Alexis Orellano. All rights reserved.
 //
 
 import UIKit
 
-struct GenreList: Decodable {
-    let genres: [Genre]?
+class GenreList: Decodable {
+    static var shared: [Genre]? = nil
+    var genres: [Genre]?
 }

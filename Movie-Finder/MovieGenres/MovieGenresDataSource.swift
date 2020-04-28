@@ -9,17 +9,17 @@
 import UIKit
 
 class MovieGenresDataSource: NSObject {
-    var genres: [Genre]?
+
 }
 
 extension MovieGenresDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return DataManager.shared.movieGenres.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! MovieGenreCell
-        cell.textLabel?.text = genres?[indexPath.row].name
+        cell.textLabel?.text = "HI"
         return cell
     }
 }

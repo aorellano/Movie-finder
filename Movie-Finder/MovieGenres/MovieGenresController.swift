@@ -23,8 +23,7 @@ class MovieGenresController: UIViewController {
         client.getGenres(from: .genre){ result in
             switch result {
             case .success(let genreResults):
-                guard let genres = genreResults.genres else { return }
-                print(genres)
+                print(genreResults.genres)
             case .failure(let error):
                 print("the error \(error)")
             }
