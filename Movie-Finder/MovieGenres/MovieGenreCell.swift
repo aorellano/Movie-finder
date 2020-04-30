@@ -9,8 +9,10 @@
 import UIKit
 
 class MovieGenreCell: UITableViewCell {
-    let genreTitle: UILabel = {
+    let title: UILabel = {
         let label = UILabel()
+        label.font = UIFont.genreFont
+        label.textColor = UIColor.titleColor
         return label
     }()
     
@@ -22,13 +24,14 @@ class MovieGenreCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        setupContentView()
+        setupGenreTitle()
+    }
+    
+    func setupContentView() {
+        contentView.backgroundColor = UIColor.accentColor
         addSubviewShape()
         addSubviewShadow()
-        
-        
-        contentView.backgroundColor = .red
-
     }
     
     func addSubviewShape() {
@@ -42,6 +45,18 @@ class MovieGenreCell: UITableViewCell {
         contentView.layer.shadowRadius = 1.0
         contentView.layer.shadowOpacity = 0.20
         contentView.layer.masksToBounds = false
+    }
+    
+    func setupGenreTitle() {
+        contentView.addSubview(title)
+        title.layout(using: [
+            title.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            title.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
+    
+    func setup(_ genre: Genre) {
+        title.text = genre.name
     }
     
     required init?(coder: NSCoder) {

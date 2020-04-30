@@ -13,7 +13,7 @@ class MovieGenresController: UIViewController {
     let dataSource = MovieGenresDataSource()
     var tableViewTouchesCount = 0
     let client = MovieClient()
-    
+    //let genresController = GenreList()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +23,12 @@ class MovieGenresController: UIViewController {
         client.getGenres(from: .genre){ result in
             switch result {
             case .success(let genreResults):
-                print(genreResults.genres)
+                self.dataSource.update(with: genreResults.genres)
+                self.movieGenresView.genresTableView.reloadData()
             case .failure(let error):
                 print("the error \(error)")
             }
         }
-            
     }
     
     override func viewWillAppear(_ animated: Bool) {

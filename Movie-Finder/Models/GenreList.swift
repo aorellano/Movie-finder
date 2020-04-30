@@ -9,6 +9,14 @@
 import UIKit
 
 class GenreList: Decodable {
-    static var shared: [Genre]? = nil
-    var genres: [Genre]?
+    var genres: [Genre]
+    
+    init(genres: [Genre]) {
+        self.genres = genres
+        print(genres)
+    }
+
+    func count() -> Int {
+        return genres.count
+    }
 }
