@@ -41,7 +41,7 @@ class MovieGenresController: UIViewController {
 
 extension MovieGenresController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -52,8 +52,30 @@ extension MovieGenresController: UITableViewDelegate {
             let query = dataSource.object(at: indexPath).name
             loadSubgenres(with: query)
         } else {
-            
+            cell.title.textColor = UIColor.highlightColor
+            UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+                    cell.contentView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
+            }) { finished in
+                UIView.animate(withDuration: 1.0, animations: {
+                    cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                })
+            }
         }
+        movieGenresView.selectButton.setTitle("Select (\(tableViewTouchesCount-1))", for: .normal)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableViewTouchesCount -= 1
+        let cell = tableView.cellForRow(at: indexPath) as! MovieGenreCell
+        cell.title.textColor = .white
+        UIView.animate(withDuration: 0.10, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                cell.contentView.transform = CGAffineTransform(scaleX: 0.98, y: 0.98)
+        }) { finished in
+            UIView.animate(withDuration: 1.0, animations: {
+                cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            })
+        }
+        movieGenresView.selectButton.setTitle("Select (\(tableViewTouchesCount-1))", for: .normal)
     }
     
     func loadSubgenres(with query: String) {
@@ -82,12 +104,23 @@ extension MovieGenresController: UITableViewDelegate {
                 switch result {
                 case .success(let subgenreResults):
                     temp += subgenreResults.results
-                
+                    
                 case .failure(let error):
                         print(error)
                 }
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! MovieGenreCell
+        
+        cell.title.textColor = cell.isSelected ? UIColor.highlightColor : UIColor.white
+        
+        cell.alpha = 0
+                UIView.animate(withDuration: 0.25, delay: 0.04 * Double(indexPath.row), animations:  {
+            cell.alpha = 1
+        })
     }
 }
 

@@ -30,6 +30,7 @@ class MovieGenreCell: UITableViewCell {
     
     func setupContentView() {
         contentView.backgroundColor = UIColor.accentColor
+        self.selectionStyle = .none
         addSubviewShape()
         addSubviewShadow()
     }
@@ -56,7 +57,7 @@ class MovieGenreCell: UITableViewCell {
     }
     
     func setup(_ genre: Genre) {
-        title.text = genre.name
+        title.text = genre.name.capitalized
     }
     
     required init?(coder: NSCoder) {

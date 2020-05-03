@@ -24,6 +24,7 @@ class MovieGenresView: UIView {
         tableView.register(MovieGenreCell.self, forCellReuseIdentifier: "cellId")
         tableView.backgroundColor = UIColor.backgroundColor
         tableView.layer.cornerRadius = 30
+        tableView.allowsMultipleSelection = true
         return tableView
     }()
     
@@ -49,7 +50,7 @@ class MovieGenresView: UIView {
         addSubview(headerLabel)
 
         headerLabel.layout(using: [
-            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
             headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
             headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
