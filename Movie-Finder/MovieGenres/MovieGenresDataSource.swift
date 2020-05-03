@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieGenresDataSource: NSObject {
-    private var data = [Genre]()
+    var data = [Genre]()
     
     override init() {
         super.init()
@@ -18,6 +18,7 @@ class MovieGenresDataSource: NSObject {
 
 extension MovieGenresDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(data.count)
         return data.count
     }
     
@@ -26,8 +27,7 @@ extension MovieGenresDataSource: UITableViewDataSource {
         
         let genre = object(at: indexPath)
         cell.setup(genre)
-        
-        
+
         return cell
     }
 }

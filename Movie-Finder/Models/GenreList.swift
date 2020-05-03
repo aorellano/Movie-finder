@@ -8,15 +8,11 @@
 
 import UIKit
 
-class GenreList: Decodable {
+class GenreList: Decodable{
     var genres: [Genre]
     
     init(genres: [Genre]) {
         self.genres = genres
         print(genres)
-    }
-
-    func count() -> Int {
-        return genres.count
     }
 }

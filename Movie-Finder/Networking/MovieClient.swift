@@ -22,6 +22,7 @@ class MovieClient: APIClient {
     func getGenres(from type: Movie, completion: @escaping (Result<GenreList, APIError>) -> Void) {
         
         let request = type.request
+        print(request)
         
         fetch(with: request, decode: { json -> GenreList? in
             guard let genreList = json as? GenreList else { return nil }
@@ -29,4 +30,18 @@ class MovieClient: APIClient {
             return genreList
         }, completion: completion)
     }
+    
+    func getSubgenres(from type: Movie, completion: @escaping (Result<SubgenreList, APIError>) -> Void) {
+        
+        let request = type.request
+        print(request)
+        
+        fetch(with: request, decode: { json -> SubgenreList? in
+            guard let genreList = json as? SubgenreList else { return nil }
+            print(genreList)
+            return genreList
+        }, completion: completion)
+    }
+    
+    
 }

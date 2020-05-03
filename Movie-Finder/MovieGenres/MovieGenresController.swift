@@ -13,8 +13,7 @@ class MovieGenresController: UIViewController {
     let dataSource = MovieGenresDataSource()
     var tableViewTouchesCount = 0
     let client = MovieClient()
-    //let genresController = GenreList()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         movieGenresView.genresTableView.dataSource = dataSource
@@ -46,23 +45,49 @@ extension MovieGenresController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! MovieGenreCell
         tableViewTouchesCount += 1
         
         if tableViewTouchesCount == 1 {
-            loadGenres()
+            let query = dataSource.object(at: indexPath).name
+            loadSubgenres(with: query)
         } else {
-            loadSubgenres()
+            
         }
     }
     
-    func loadGenres() {
-        //request genres from database
+    func loadSubgenres(with query: String) {
+        movieGenresView.selectButton.isHidden = false
         
+        client.getSubgenres(from: .subGenre(term: query, page: "1")) { result  in
+            switch result {
+            case .success(let subgenreResults):
+                self.fetch(pages: subgenreResults.total_pages, with: query)
+            case .failure(let error):
+                    print(error)
+            }
+        }
     }
     
-    func loadSubgenres() {
-        movieGenresView.selectButton.isHidden = false
-        //request subgenres from database
+    func fetch(pages: Int, with query: String) {
+        var temp = [Genre]() {
+            didSet {
+                self.dataSource.update(with: temp)
+                movieGenresView.genresTableView.reloadData()
+            }
+        }
+        
+        for i in 1...pages {
+            client.getSubgenres(from: .subGenre(term: query, page: String(i))) { result  in
+                switch result {
+                case .success(let subgenreResults):
+                    temp += subgenreResults.results
+                
+                case .failure(let error):
+                        print(error)
+                }
+            }
+        }
     }
 }
 

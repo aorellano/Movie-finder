@@ -34,7 +34,7 @@ extension Endpoint {
 
 enum Movie {
     case genre
-    case subGenre(term: String)
+    case subGenre(term: String, page: String)
 }
 
 extension Movie: Endpoint {
@@ -54,10 +54,11 @@ extension Movie: Endpoint {
         case .genre: return [
                 URLQueryItem(name: "api_key", value: apiKey)
             ]
-        case .subGenre(let term):
+        case .subGenre(let term, let page):
             return [
                 URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "query", value: term)
+                URLQueryItem(name: "query", value: term),
+                URLQueryItem(name: "page", value: page)
             ]
         }
     }
