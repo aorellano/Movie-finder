@@ -9,8 +9,12 @@ import UIKit
 
 class MovieRecommendationController: UIViewController {
     let movieRecommendationView = MovieRecommendationView()
+    let dataSource = MoviesDataSource()
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         print("Thats whats up")
+        movieRecommendationView.movieCollectionView.dataSource = dataSource
     }
     
     override func loadView() {

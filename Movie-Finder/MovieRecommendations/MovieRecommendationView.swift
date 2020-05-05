@@ -9,10 +9,51 @@
 import UIKit
 
 class MovieRecommendationView: UIView {
+    let headerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Recommended\nMovies"
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.secondaryTitleFont
+        label.textColor = UIColor.highlightColor
+        return label
+    }()
+    
+    let movieCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        
+        collectionView.backgroundColor = .white
+        return collectionView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        movieCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "yo")
+        
         backgroundColor = UIColor.backgroundColor
+        
+        setupHeaderLabel()
+        setupCollectionView()
+    }
+    
+    func setupHeaderLabel() {
+        addSubview(headerLabel)
+        headerLabel.layout(using: [
+            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
+            headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
+        ])
+    }
+    
+    func setupCollectionView() {
+        addSubview(movieCollectionView)
+        movieCollectionView.layout(using: [
+            movieCollectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20),
+            movieCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
+            movieCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            movieCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {
