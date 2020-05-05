@@ -13,11 +13,19 @@ class MovieRecommendationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Thats whats up")
+        
         movieRecommendationView.movieCollectionView.dataSource = dataSource
+        movieRecommendationView.movieCollectionView.delegate = self
     }
     
     override func loadView() {
         view = movieRecommendationView
     }
 }
+
+extension MovieRecommendationController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.bounds.width/2.1), height: 300)
+    }
+}
+

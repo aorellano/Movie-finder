@@ -47,8 +47,6 @@ class MovieGenresView: UIView {
         setupSelectButton()
     }
     
-
-    
     fileprivate func setupHeaderLabel() {
         addSubview(headerLabel)
 

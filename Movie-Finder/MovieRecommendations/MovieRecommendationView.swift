@@ -18,7 +18,9 @@ class MovieRecommendationView: UIView {
         label.textColor = UIColor.highlightColor
         return label
     }()
+
     
+
     let movieCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
@@ -29,12 +31,13 @@ class MovieRecommendationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        movieCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "yo")
+        movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
         
         backgroundColor = UIColor.backgroundColor
         
         setupHeaderLabel()
         setupCollectionView()
+
     }
     
     func setupHeaderLabel() {
@@ -55,6 +58,8 @@ class MovieRecommendationView: UIView {
             movieCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
+    
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

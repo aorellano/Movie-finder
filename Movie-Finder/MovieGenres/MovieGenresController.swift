@@ -36,7 +36,6 @@ class MovieGenresController: UIViewController {
         client.getGenres(from: .genre){ result in
             switch result {
             case .success(let genreResults):
-                print(genreResults.genres)
                 self.dataSource.update(with: genreResults.genres)
                 self.movieGenresView.genresTableView.reloadData()
             case .failure(let error):
@@ -53,9 +52,7 @@ class MovieGenresController: UIViewController {
             case .failure(let error):
                 print(error)
             }
-            
         }
-        
         navigationController?.pushViewController(movieRecommendationController, animated: false)
     }
 }
