@@ -13,6 +13,8 @@ class MovieGenresController: UIViewController {
     let dataSource = MovieGenresDataSource()
     var tableViewTouchesCount = 0
     let client = MovieClient()
+    let movieRecommendationController = MovieRecommendationController()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,6 @@ class MovieGenresController: UIViewController {
     }
     
     @objc func genresSelected() {
-        print("Selecting this generes")
         client.recommendMovies(from: .discover(page: "1", genre: "28", subgenres: "219404", sortedBy: "popularity.desc")) { result in
             switch result{
             case .success(let recommendations):
@@ -54,6 +55,8 @@ class MovieGenresController: UIViewController {
             }
             
         }
+        
+        navigationController?.pushViewController(movieRecommendationController, animated: false)
     }
 }
 
