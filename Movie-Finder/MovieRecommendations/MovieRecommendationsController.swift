@@ -8,7 +8,12 @@
 import UIKit
 
 class MovieRecommendationController: UIViewController {
+    let movieRecommendationView = MovieRecommendationView()
     override func viewDidLoad() {
         print("Thats whats up")
+    }
+    
+    override func loadView() {
+        view = movieRecommendationView
     }
 }
