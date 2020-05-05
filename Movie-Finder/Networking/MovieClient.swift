@@ -19,29 +19,36 @@ class MovieClient: APIClient {
         self.init(configuration: .default)
     }
     
-    func getGenres(from type: Movie, completion: @escaping (Result<GenreList, APIError>) -> Void) {
+    func getGenres(from type: MovieRecommendation, completion: @escaping (Result<GenreList, APIError>) -> Void) {
         
         let request = type.request
         print(request)
         
         fetch(with: request, decode: { json -> GenreList? in
             guard let genreList = json as? GenreList else { return nil }
-            print(genreList)
             return genreList
         }, completion: completion)
     }
     
-    func getSubgenres(from type: Movie, completion: @escaping (Result<SubgenreList, APIError>) -> Void) {
+    func getSubgenres(from type: MovieRecommendation, completion: @escaping (Result<SubgenreList, APIError>) -> Void) {
         
         let request = type.request
         print(request)
         
         fetch(with: request, decode: { json -> SubgenreList? in
             guard let genreList = json as? SubgenreList else { return nil }
-            print(genreList)
             return genreList
         }, completion: completion)
     }
     
-    
+    func recommendMovies(from type: MovieRecommendation, completion: @escaping (Result<MovieList, APIError>) -> Void) {
+        
+        let request = type.request
+        print(request)
+        
+        fetch(with: request, decode: { json -> MovieList? in
+            guard let movieList = json as? MovieList else { return nil }
+            return movieList
+        }, completion: completion)
+    }
 }

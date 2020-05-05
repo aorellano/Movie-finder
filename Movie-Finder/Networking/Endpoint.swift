@@ -32,12 +32,13 @@ extension Endpoint {
     }
 }
 
-enum Movie {
+enum MovieRecommendation {
     case genre
     case subGenre(term: String, page: String)
+    case discover(page: String, genre: String, subgenres: String, sortedBy: String)
 }
 
-extension Movie: Endpoint {
+extension MovieRecommendation: Endpoint {
     var base: URL {
         return URL(string: "https://api.themoviedb.org/3")!
     }
@@ -46,6 +47,7 @@ extension Movie: Endpoint {
         switch self {
             case .genre: return "/genre/movie/list"
             case .subGenre: return "/search/keyword"
+            case .discover: return "/discover/movie"
         }
     }
     
@@ -60,6 +62,16 @@ extension Movie: Endpoint {
                 URLQueryItem(name: "query", value: term),
                 URLQueryItem(name: "page", value: page)
             ]
+        case .discover(let page, let genre, let subgenres, let sortedBy):
+            return [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "page", value: page),
+                URLQueryItem(name: "with_genres", value: genre),
+                URLQueryItem(name: "with_keywords", value: subgenres),
+                URLQueryItem(name: "sort_by", value: sortedBy)
+            ]
         }
+        
+
     }
 }

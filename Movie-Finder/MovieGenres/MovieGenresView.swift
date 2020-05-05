@@ -33,6 +33,7 @@ class MovieGenresView: UIView {
         button.backgroundColor = UIColor.tintColor
         button.layer.cornerRadius = 10
         button.isHidden = true
+        button.addTarget(self, action: #selector(MovieGenresController.genresSelected), for: .touchUpInside)
         button.setTitle("Select", for: .normal)
         return button
     }()
@@ -45,6 +46,8 @@ class MovieGenresView: UIView {
         setupTableView()
         setupSelectButton()
     }
+    
+
     
     fileprivate func setupHeaderLabel() {
         addSubview(headerLabel)

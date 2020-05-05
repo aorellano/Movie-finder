@@ -19,15 +19,7 @@ class MovieGenresController: UIViewController {
         movieGenresView.genresTableView.dataSource = dataSource
         movieGenresView.genresTableView.delegate = self
         
-        client.getGenres(from: .genre){ result in
-            switch result {
-            case .success(let genreResults):
-                self.dataSource.update(with: genreResults.genres)
-                self.movieGenresView.genresTableView.reloadData()
-            case .failure(let error):
-                print("the error \(error)")
-            }
-        }
+        fetchGenres()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +28,32 @@ class MovieGenresController: UIViewController {
     
     override func loadView() {
         view = movieGenresView
+    }
+    
+    func fetchGenres() {
+        client.getGenres(from: .genre){ result in
+            switch result {
+            case .success(let genreResults):
+                print(genreResults.genres)
+                self.dataSource.update(with: genreResults.genres)
+                self.movieGenresView.genresTableView.reloadData()
+            case .failure(let error):
+                print("the error \(error)")
+            }
+        }
+    }
+    
+    @objc func genresSelected() {
+        print("Selecting this generes")
+        client.recommendMovies(from: .discover(page: "1", genre: "28", subgenres: "219404", sortedBy: "popularity.desc")) { result in
+            switch result{
+            case .success(let recommendations):
+                print(recommendations.results)
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
     }
 }
 
@@ -96,6 +114,7 @@ extension MovieGenresController: UITableViewDelegate {
             didSet {
                 self.dataSource.update(with: temp)
                 movieGenresView.genresTableView.reloadData()
+                movieGenresView.genresTableView.scrollToRow(at: [0,0], at: .none, animated: true)
             }
         }
         
