@@ -10,6 +10,7 @@ import UIKit
 
 class MovieGenresDataSource: NSObject {
     var data = [Genre]()
+    var selectedData = [Int]()
     
     override init() {
         super.init()
@@ -39,5 +40,22 @@ extension MovieGenresDataSource {
     func update(with data: [Genre]) {
         self.data = data
     }
+    
+    func add(id: Int) {
+        self.selectedData.append(id)
+    }
+    
+    func remove(id: Int) {
+        self.selectedData.removeAll(where: {$0 == id})
+    }
+    
+//    func genreIds() -> [Int] {
+//        var genreIds = [Int]()
+//        for genre in selectedData {
+//            print("man\(genre.id)")
+//            genreIds.append(genre.id)
+//        }
+//        return genreIds
+//    }
 }
 

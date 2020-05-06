@@ -44,6 +44,7 @@ class MovieGenresController: UIViewController {
     }
     
     @objc func genresSelected() {
+        movieRecommendationController.fetchRecommendations(with: dataSource.selectedData)
         navigationController?.pushViewController(movieRecommendationController, animated: false)
     }
 }
@@ -69,8 +70,11 @@ extension MovieGenresController: UITableViewDelegate {
                     cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 })
             }
+            
         }
-        movieGenresView.selectButton.setTitle("Select (\(tableViewTouchesCount-1))", for: .normal)
+        let id = dataSource.data[indexPath.row].id
+        dataSource.add(id: id)
+        movieGenresView.selectButton.setTitle("Select (\(dataSource.selectedData.count))", for: .normal)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -85,6 +89,12 @@ extension MovieGenresController: UITableViewDelegate {
             })
         }
         movieGenresView.selectButton.setTitle("Select (\(tableViewTouchesCount-1))", for: .normal)
+        
+        let id = dataSource.data[indexPath.row].id
+        dataSource.remove(id: id)
+        
+        movieGenresView.selectButton.setTitle("Select (\(dataSource.selectedData.count))", for: .normal)
+        
     }
     
     func loadSubgenres(with query: String) {

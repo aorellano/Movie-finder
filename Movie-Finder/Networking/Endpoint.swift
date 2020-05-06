@@ -85,7 +85,8 @@ extension MovieRecommendation: Endpoint {
                 URLQueryItem(name: "page", value: page),
                 URLQueryItem(name: "with_genres", value: genre),
                 URLQueryItem(name: "with_keywords", value: subgenres),
-                URLQueryItem(name: "sort_by", value: sortedBy)
+                URLQueryItem(name: "sort_by", value: sortedBy),
+                URLQueryItem(name: "with_original_language", value: "en")
             ]
         }
         
