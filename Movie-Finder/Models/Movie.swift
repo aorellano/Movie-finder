@@ -11,4 +11,5 @@ import UIKit
 struct Movie: Decodable {
     var id: Int
     var title: String
+    var poster_path: String?
 }

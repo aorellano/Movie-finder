@@ -8,15 +8,25 @@
 import UIKit
 
 class MoviesDataSource: NSObject, UICollectionViewDataSource {
-    let data = [String]()
+    var data = [Movie]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "yo", for: indexPath) as! MovieCell
-        cell.backgroundColor = .blue
+        let movie = object(at: indexPath)
+        cell.setup(movie)
         return cell
+    }
+}
+
+extension MoviesDataSource {
+    func object(at indexPath: IndexPath) -> Movie {
+        return data[indexPath.row]
+    }
+    func update(with data: [Movie]) {
+        self.data = data
     }
 }

@@ -11,11 +11,10 @@ import UIKit
 class MovieGenresController: UIViewController {
     let movieGenresView = MovieGenresView()
     let dataSource = MovieGenresDataSource()
-    var tableViewTouchesCount = 0
     let client = MovieClient()
     let movieRecommendationController = MovieRecommendationController()
+    var tableViewTouchesCount = 0
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         movieGenresView.genresTableView.dataSource = dataSource
@@ -45,14 +44,6 @@ class MovieGenresController: UIViewController {
     }
     
     @objc func genresSelected() {
-        client.recommendMovies(from: .discover(page: "1", genre: "28", subgenres: "219404", sortedBy: "popularity.desc")) { result in
-            switch result{
-            case .success(let recommendations):
-                print(recommendations.results)
-            case .failure(let error):
-                print(error)
-            }
-        }
         navigationController?.pushViewController(movieRecommendationController, animated: false)
     }
 }

@@ -10,12 +10,29 @@ import UIKit
 class MovieRecommendationController: UIViewController {
     let movieRecommendationView = MovieRecommendationView()
     let dataSource = MoviesDataSource()
+    let client = MovieClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         movieRecommendationView.movieCollectionView.dataSource = dataSource
         movieRecommendationView.movieCollectionView.delegate = self
+        
+        fetchRecommendations()
+    }
+    
+    func fetchRecommendations() {
+        client.recommendMovies(from: .discover(page: "1", genre: "28", subgenres: "219404", sortedBy: "popularity.desc")) { result in
+            switch result{
+            case .success(let recommendations):
+                self.dataSource.update(with: recommendations.results)
+                self.movieRecommendationView.movieCollectionView.reloadData()
+                print(recommendations.results)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     override func loadView() {

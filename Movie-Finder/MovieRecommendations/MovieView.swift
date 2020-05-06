@@ -11,7 +11,7 @@ import UIKit
 class MovieView: UIView {
     let movieContainer: UIView = {
         let container = UIView()
-        container.backgroundColor = .black
+        container.backgroundColor = UIColor.backgroundColor
         container.layer.cornerRadius = 20
         container.layer.masksToBounds = true
         return container
@@ -28,7 +28,9 @@ class MovieView: UIView {
     let movieTitle: UILabel = {
         let label = UILabel()
         label.text = "Dummy Code"
-        label.backgroundColor = .green
+        label.backgroundColor = UIColor.backgroundColor
+        label.textColor = .white
+        label.font = UIFont.collectionViewFont
         return label
     }()
 
@@ -38,12 +40,8 @@ class MovieView: UIView {
         setupContainer()
         setupMovieTitle()
         setupMoviePoster()
-        
-        
     }
-    
 
-    
     func setupContainer() {
         addSubview(movieContainer)
         

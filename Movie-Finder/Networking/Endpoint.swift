@@ -38,6 +38,23 @@ enum MovieRecommendation {
     case discover(page: String, genre: String, subgenres: String, sortedBy: String)
 }
 
+enum ImageType {
+    case poster
+    case backdrop
+    case castImage
+    
+    var path: String {
+        switch self {
+        case .poster:
+            return "http://image.tmdb.org/t/p/w185"
+        case .castImage:
+            return "http://image.tmdb.org/t/p/w45"
+        default:
+            return "http://image.tmdb.org/t/p/w780"
+        }
+    }
+}
+
 extension MovieRecommendation: Endpoint {
     var base: URL {
         return URL(string: "https://api.themoviedb.org/3")!

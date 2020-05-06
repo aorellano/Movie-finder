@@ -28,6 +28,12 @@ class MovieCell: UICollectionViewCell {
         ])
     }
     
+    func setup(_ movie: Movie) {
+        let posterPath = movie.poster_path ?? ""
+        movieView.movieTitle.text = movie.title
+        movieView.moviePoster.downloadImage(imageType: .poster, path: posterPath)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

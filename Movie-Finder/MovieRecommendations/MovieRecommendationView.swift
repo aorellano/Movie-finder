@@ -24,7 +24,7 @@ class MovieRecommendationView: UIView {
     let movieCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor.backgroundColor
         return collectionView
     }()
     
@@ -58,9 +58,7 @@ class MovieRecommendationView: UIView {
             movieCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
