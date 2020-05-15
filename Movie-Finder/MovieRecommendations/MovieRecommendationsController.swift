@@ -23,9 +23,8 @@ class MovieRecommendationController: UIViewController {
         
         let genreStr = genreIds.map({String($0)})
         let genre = genreStr.first ?? ""
-        let subGenres = genreStr.joined(separator: "|")
         
-        client.recommendMovies(from: .discover(page: "1", genre: genre, subgenres: subGenres, sortedBy: "popularity.desc")) { result in
+        client.recommendMovies(from: .discover(page: "1", genre: genre, sortedBy: "popularity.desc")) { result in
             switch result{
             case .success(let recommendations):
                 self.dataSource.update(with: recommendations.results)

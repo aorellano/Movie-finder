@@ -35,7 +35,7 @@ extension Endpoint {
 enum MovieRecommendation {
     case genre
     case subGenre(term: String, page: String)
-    case discover(page: String, genre: String, subgenres: String, sortedBy: String)
+    case discover(page: String, genre: String, sortedBy: String)
 }
 
 enum ImageType {
@@ -79,12 +79,11 @@ extension MovieRecommendation: Endpoint {
                 URLQueryItem(name: "query", value: term),
                 URLQueryItem(name: "page", value: page)
             ]
-        case .discover(let page, let genre, let subgenres, let sortedBy):
+        case .discover(let page, let genre, let sortedBy):
             return [
                 URLQueryItem(name: "api_key", value: apiKey),
                 URLQueryItem(name: "page", value: page),
                 URLQueryItem(name: "with_genres", value: genre),
-                URLQueryItem(name: "with_keywords", value: subgenres),
                 URLQueryItem(name: "sort_by", value: sortedBy),
                 URLQueryItem(name: "with_original_language", value: "en")
             ]

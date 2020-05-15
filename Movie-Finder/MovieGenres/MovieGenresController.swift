@@ -44,8 +44,8 @@ class MovieGenresController: UIViewController {
     }
     
     @objc func genresSelected() {
-        movieRecommendationController.fetchRecommendations(with: dataSource.selectedData)
-        navigationController?.pushViewController(movieRecommendationController, animated: false)
+//        movieRecommendationController.fetchRecommendations(with: dataSource.selectedData)
+//
     }
 }
 
@@ -56,25 +56,30 @@ extension MovieGenresController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! MovieGenreCell
-        tableViewTouchesCount += 1
         
-        if tableViewTouchesCount == 1 {
-            let query = dataSource.object(at: indexPath).name
-            loadSubgenres(with: query)
-        } else {
-            cell.title.textColor = UIColor.highlightColor
-            UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-                    cell.contentView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
-            }) { finished in
-                UIView.animate(withDuration: 1.0, animations: {
-                    cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                })
-            }
-            
-        }
-        let id = dataSource.data[indexPath.row].id
-        dataSource.add(id: id)
-        movieGenresView.selectButton.setTitle("Select (\(dataSource.selectedData.count))", for: .normal)
+        let genreId = dataSource.object(at: indexPath).id
+    
+        movieRecommendationController.fetchRecommendations(with: [genreId])
+        navigationController?.pushViewController(movieRecommendationController, animated: false)
+//        tableViewTouchesCount += 1
+//
+//        if tableViewTouchesCount == 1 {
+//            let query = dataSource.object(at: indexPath).name
+//            loadSubgenres(with: query)
+//        } else {
+//            cell.title.textColor = UIColor.highlightColor
+//            UIView.animate(withDuration: 0.05, delay: 0.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
+//                    cell.contentView.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
+//            }) { finished in
+//                UIView.animate(withDuration: 1.0, animations: {
+//                    cell.contentView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                })
+//            }
+//
+//        }
+//        let id = dataSource.data[indexPath.row].id
+//        dataSource.add(id: id)
+        //movieGenresView.selectButton.setTitle("Select (\(dataSource.selectedData.count))", for: .normal)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
