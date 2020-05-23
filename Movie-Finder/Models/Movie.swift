@@ -12,4 +12,7 @@ struct Movie: Decodable {
     var id: Int
     var title: String
     var poster_path: String?
+    var overview: String?
+    var vote_average: Double?
+    var backdrop_path: String?
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieView: UIView {
+class MovieCellView: UIView {
     let movieContainer: UIView = {
         let container = UIView()
         container.backgroundColor = UIColor.backgroundColor
@@ -74,9 +74,7 @@ class MovieView: UIView {
             moviePoster.bottomAnchor.constraint(equalTo: movieTitle.topAnchor)
         ])
     }
-    
 
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

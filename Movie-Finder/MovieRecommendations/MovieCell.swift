@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell {
-    let movieView = MovieView()
+    let movieView = MovieCellView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

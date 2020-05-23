@@ -19,8 +19,6 @@ class MovieRecommendationView: UIView {
         return label
     }()
 
-    
-
     let movieCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         

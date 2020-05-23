@@ -9,6 +9,7 @@ import UIKit
 
 class MovieRecommendationController: UIViewController {
     let movieRecommendationView = MovieRecommendationView()
+    let movieController = MovieController()
     let dataSource = MoviesDataSource()
     let client = MovieClient()
     
@@ -46,5 +47,13 @@ extension MovieRecommendationController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width/2.1), height: 300)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = dataSource.data[indexPath.row]
+        movieController.movie = movie
+        navigationController?.pushViewController(movieController, animated: true)
+        
+    }
 }
+
 

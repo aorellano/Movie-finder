@@ -88,7 +88,5 @@ extension MovieRecommendation: Endpoint {
                 URLQueryItem(name: "with_original_language", value: "en")
             ]
         }
-        
-
     }
 }
