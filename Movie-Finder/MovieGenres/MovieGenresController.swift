@@ -20,6 +20,8 @@ class MovieGenresController: UIViewController {
         movieGenresView.genresTableView.dataSource = dataSource
         movieGenresView.genresTableView.delegate = self
         
+        self.title = "Tab 2"
+        
         fetchGenres()
     }
     
