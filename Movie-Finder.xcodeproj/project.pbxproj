@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0150243247F278500979235 /* RecentMoviesStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0150242247F278500979235 /* RecentMoviesStackView.swift */; };
 		D0565444246E749D00553C71 /* MovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0565443246E749D00553C71 /* MovieController.swift */; };
 		D0565446246E74AB00553C71 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0565445246E74AB00553C71 /* MovieView.swift */; };
 		D085CCE0245B55050047B914 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D085CCDF245B55050047B914 /* UIColor+Extension.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0150242247F278500979235 /* RecentMoviesStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMoviesStackView.swift; sourceTree = "<group>"; };
 		D0565443246E749D00553C71 /* MovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieController.swift; sourceTree = "<group>"; };
 		D0565445246E74AB00553C71 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		D085CCDF245B55050047B914 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				D0EB37C7247B1B610091EE33 /* RecentMoviesController.swift */,
 				D0EB37C9247B1B730091EE33 /* RecentMoviesView.swift */,
+				D0150242247F278500979235 /* RecentMoviesStackView.swift */,
 			);
 			path = RecentMovies;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				D0F78B8A244134CD00213881 /* Endpoint.swift in Sources */,
 				D095E9BE2461323A003CCC53 /* MovieRecommendationView.swift in Sources */,
 				D0EB37CD247B1D8C0091EE33 /* TabController.swift in Sources */,
+				D0150243247F278500979235 /* RecentMoviesStackView.swift in Sources */,
 				D0F78B7A243E813B00213881 /* UIView+Extension.swift in Sources */,
 				D095E9B824610F21003CCC53 /* Movie.swift in Sources */,
 				D0EB37CA247B1B730091EE33 /* RecentMoviesView.swift in Sources */,

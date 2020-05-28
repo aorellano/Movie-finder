@@ -20,6 +20,7 @@ extension UIColor {
 extension UIFont {
     static let titleFont = UIFont(name: "HelveticaNeue-Bold", size: 40)
     static let secondaryTitleFont = UIFont(name: "HelveticaNeue-Bold", size: 30)
+    static let recentMovieFont = UIFont(name: "HelveticaNeue-Bold", size: 25)
     static let genreFont = UIFont(name: "HelveticaNeue-Bold", size: 20)
     static let collectionViewFont = UIFont(name: "HelveticaNeue-Bold", size: 16)
     static let descriptionFont = UIFont(name: "HelveticaNeue", size: 12)

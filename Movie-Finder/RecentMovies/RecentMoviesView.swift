@@ -9,77 +9,27 @@
 import UIKit
 
 class RecentMoviesView: UIView {
-//
-//    let firstUnderline: UIView = {
-//        let line = UIView()
-//        line.backgroundColor = UIColor.highlightColor
-//        return view
-//    }()
-//
-    let nowPlayingButton: UIButton = {
-        let button = UIButton()
-        let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
-        button.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
-        
-        let line = UIView()
-        line.backgroundColor = UIColor.white
-        button.addSubview(line)
-        line.layout(using: [
-            line.leadingAnchor.constraint(equalTo: button.leadingAnchor, constant: 50),
-            line.trailingAnchor.constraint(equalTo: button.trailingAnchor, constant: -50),
-            line.topAnchor.constraint(equalTo: button.bottomAnchor, constant: -5),
-            line.heightAnchor.constraint(equalToConstant: 1.5)
-        ])
-        return button
-    }()
-    
-    let comingSoonButton: UIButton = {
-        let button = UIButton()
-               
-
-        let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
-        button.setAttributedTitle(NSAttributedString(string: "Coming Soon", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
-        
-        return button
-    }()
-    
-//    let secondUnderline: UIView = {
-//        let line = UIView()
-//        line.backgroundColor = .white
-//        return view
-//    }()
-//
-    lazy var recentMoviesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nowPlayingButton, comingSoonButton])
-        stackView.alignment = .fill
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        //stackView.spacing = 30
-        return stackView
-    }()
-    
+    let recentMoviesStackView = RecentMoviesStackView()
     
     let recentMoviesCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = UIColor.backgroundColor
         return collectionView
     }()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .backgroundColor
         
         recentMoviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
-        setupRecentMoviesStackView()
-        //setupUnderlines()
-        setupCollectionView()
         
+        setupRecentMoviesStackView()
+        setupCollectionView()
     }
     
     func setupRecentMoviesStackView() {
         addSubview(recentMoviesStackView)
-        
+    
         recentMoviesStackView.layout(using: [
             recentMoviesStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             recentMoviesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
@@ -87,31 +37,14 @@ class RecentMoviesView: UIView {
             recentMoviesStackView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    
-//    func setupUnderlines() {
-//        addSubview(firstUnderline)
-//        addSubview(secondUnderline)
-//        
-//        firstUnderline.layout(using: [
-//            firstUnderline.leadingAnchor.constraint(equalTo: recentMoviesStackView.tag.leadingAnchor),
-//            firstUnderline.trailingAnchor.constraint(equalTo: recentMoviesStackView.trailingAnchor),
-//            firstUnderline.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor)
-//        ])
-//        
-//        secondUnderline.layout(using: [
-//            firstUnderline.leadingAnchor.constraint(equalTo: recentMoviesStackView.leadingAnchor),
-//            firstUnderline.trailingAnchor.constraint(equalTo: recentMoviesStackView.trailingAnchor),
-//            firstUnderline.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor)
-//        ])
-//    }
-    
+
     func setupCollectionView() {
         addSubview(recentMoviesCollectionView)
         
         recentMoviesCollectionView.layout(using: [
-            recentMoviesCollectionView.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor),
-            recentMoviesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            recentMoviesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            recentMoviesCollectionView.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor, constant: 40),
+            recentMoviesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            recentMoviesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             recentMoviesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
