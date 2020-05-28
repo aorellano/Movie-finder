@@ -29,28 +29,30 @@ class RecentMoviesController: UIViewController {
     
     @objc func comingSoonButtonPressed() {
         buttonPressed(button: recentMoviesView.recentMoviesStackView.comingSoonButton)
+     
     }
     
     func buttonPressed(button: UIButton) {
-        let smallFont = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
-        let largeFont = [NSAttributedString.Key.font: UIFont.recentMovieFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
-        
-        
+        let highlightedColor = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
+        let regularColor = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
         if button.tag == 0 {
             recentMoviesView.recentMoviesStackView.firstUnderline.isHidden = false
             recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = true
-            button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: largeFont as [NSAttributedString.Key : Any]), for: .normal)
-            recentMoviesView.recentMoviesStackView.comingSoonButton.setAttributedTitle(NSAttributedString(string: "Coming Soon", attributes: smallFont as [NSAttributedString.Key : Any]), for: .normal)
-            print("hi")
-
+            
+            button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
+            recentMoviesView.recentMoviesStackView.comingSoonButton.setAttributedTitle(NSAttributedString(string: "Coming Soon", attributes: regularColor), for: .normal)
         } else {
             print("there")
             recentMoviesView.recentMoviesStackView.firstUnderline.isHidden = true
             recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = false
-            button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: largeFont as [NSAttributedString.Key : Any]), for: .normal)
-            recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: smallFont as [NSAttributedString.Key : Any]), for: .normal)
+            
+            button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
+            recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: regularColor), for: .normal)
+     
+            
+            //button.titleLabel?.textColor = UIColor.highlightColor
+            //recentMoviesView.recentMoviesStackView.nowPlayingButton.setTitleColor(.white, for: .normal)
         }
-
     }
     
     

@@ -11,7 +11,7 @@ import UIKit
 class RecentMoviesStackView: UIView {
     let nowPlayingButton: UIButton = {
         let button = UIButton()
-        let attributes = [NSAttributedString.Key.font: UIFont.recentMovieFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
+        let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
         button.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
         button.tag = 0
         
