@@ -11,24 +11,55 @@ import UIKit
 class RecentMoviesController: UIViewController {
     let recentMoviesView = RecentMoviesView()
     let dataSource = MoviesDataSource()
+    let client = MovieClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Tab 1"
-        recentMoviesView.recentMoviesCollectionView.dataSource = self
+        recentMoviesView.recentMoviesCollectionView.dataSource = dataSource
         recentMoviesView.recentMoviesCollectionView.delegate = self
         
         recentMoviesView.recentMoviesStackView.nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchDown)
         recentMoviesView.recentMoviesStackView.comingSoonButton.addTarget(self, action: #selector(comingSoonButtonPressed), for: .touchDown)
+        
+        client.recommendMovies(from: .nowPlaying) { result in
+            switch result {
+            case .success(let results):
+                self.dataSource.update(with: results.results)
+                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc func nowPlayingButtonPressed() {
         buttonPressed(button: recentMoviesView.recentMoviesStackView.nowPlayingButton)
+        
+        client.recommendMovies(from: .nowPlaying) { result in
+            switch result {
+            case .success(let results):
+                self.dataSource.update(with: results.results)
+                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc func comingSoonButtonPressed() {
         buttonPressed(button: recentMoviesView.recentMoviesStackView.comingSoonButton)
+        
+        client.recommendMovies(from: .upcoming) { result in
+            switch result {
+            case .success(let results):
+                self.dataSource.update(with: results.results)
+                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
      
     }
     
@@ -48,14 +79,8 @@ class RecentMoviesController: UIViewController {
             
             button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
             recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: regularColor), for: .normal)
-     
-            
-            //button.titleLabel?.textColor = UIColor.highlightColor
-            //recentMoviesView.recentMoviesStackView.nowPlayingButton.setTitleColor(.white, for: .normal)
         }
     }
-    
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -70,16 +95,7 @@ class RecentMoviesController: UIViewController {
     }
 }
 
-extension RecentMoviesController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "yo", for: indexPath) as! MovieCell
-        
-        return cell
-    }
+extension RecentMoviesController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width/2.1), height: 300)

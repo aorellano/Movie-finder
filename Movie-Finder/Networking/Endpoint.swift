@@ -36,6 +36,8 @@ enum MovieRecommendation {
     case genre
     case subGenre(term: String, page: String)
     case discover(page: String, genre: String, sortedBy: String)
+    case nowPlaying
+    case upcoming
 }
 
 enum ImageType {
@@ -65,6 +67,8 @@ extension MovieRecommendation: Endpoint {
             case .genre: return "/genre/movie/list"
             case .subGenre: return "/search/keyword"
             case .discover: return "/discover/movie"
+            case .nowPlaying: return "/movie/now_playing"
+            case .upcoming: return "movie/upcoming"
         }
     }
     
@@ -85,7 +89,18 @@ extension MovieRecommendation: Endpoint {
                 URLQueryItem(name: "page", value: page),
                 URLQueryItem(name: "with_genres", value: genre),
                 URLQueryItem(name: "sort_by", value: sortedBy),
-                URLQueryItem(name: "with_original_language", value: "en")
+                URLQueryItem(name: "with_original_language", value: "en"),
+                URLQueryItem(name: "region", value: "US")
+            ]
+        case .nowPlaying: return [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "language", value: "en-US"),
+                URLQueryItem(name: "region", value: "US")
+            ]
+        case .upcoming: return [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "language", value: "en-US"),
+                URLQueryItem(name: "region", value: "US")
             ]
         }
     }
