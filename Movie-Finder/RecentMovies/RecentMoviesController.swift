@@ -87,6 +87,7 @@ class RecentMoviesController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = true
+        
     }
     
 

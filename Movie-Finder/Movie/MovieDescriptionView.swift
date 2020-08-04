@@ -40,6 +40,15 @@ class MovieDescriptionView: UIView {
         return label
     }()
     
+    let movieYear: UILabel = {
+        let label = UILabel()
+        label.text = "2020"
+        label.textColor = .white
+        label.font = UIFont.collectionViewFont
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let descriptionTitle: UILabel = {
         let label = UILabel()
         label.text = "Movie Plot"
@@ -66,8 +75,10 @@ class MovieDescriptionView: UIView {
         
         addMovieTitle()
         addMovieRating()
+        addMovieYear()
         addDescriptionTitle()
         addMovieDescription()
+        
     }
 
     func addMovieTitle() {
@@ -79,6 +90,8 @@ class MovieDescriptionView: UIView {
             title.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -80)
         ])
     }
+    
+    
        
     func addMovieRating() {
         addSubview(ratingBackground)
@@ -97,11 +110,20 @@ class MovieDescriptionView: UIView {
         ])
     }
     
+    func addMovieYear() {
+        addSubview(movieYear)
+        
+        movieYear.layout(using: [
+            movieYear.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            movieYear.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10)
+        ])
+    }
+    
     func addDescriptionTitle() {
         addSubview(descriptionTitle)
         
         descriptionTitle.layout(using: [
-            descriptionTitle.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 30),
+            descriptionTitle.topAnchor.constraint(equalTo: movieYear.bottomAnchor, constant: 25),
             descriptionTitle.leadingAnchor.constraint(equalTo: title.leadingAnchor)
         ])
         
@@ -117,6 +139,8 @@ class MovieDescriptionView: UIView {
         ])
         
     }
+    
+
     
     
     required init?(coder: NSCoder) {

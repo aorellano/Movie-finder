@@ -52,6 +52,15 @@ class MovieClient: APIClient {
         }, completion: completion)
     }
     
+    func getCast(from type: MovieRecommendation, completion: @escaping (Result<CastList, APIError>) -> Void) {
+        let request = type.request
+        print(request)
+        
+        fetch(with: request, decode: { json -> CastList? in
+            guard let castList = json as? CastList else { return nil }
+            return castList
+        }, completion: completion)
+    }
     
     
     

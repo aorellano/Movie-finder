@@ -41,6 +41,11 @@ class MovieRecommendationController: UIViewController {
     override func loadView() {
         view = movieRecommendationView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        movieRecommendationView.movieCollectionView.reloadData()
+    }
 }
 
 extension MovieRecommendationController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -52,6 +57,7 @@ extension MovieRecommendationController: UICollectionViewDelegate, UICollectionV
         let movie = dataSource.data[indexPath.row]
         movieController.movie = movie
         navigationController?.pushViewController(movieController, animated: true)
+        print(movie.title)
         
     }
 }
