@@ -9,26 +9,33 @@
 import UIKit
 
 class RecentMoviesDataSource: NSObject, UICollectionViewDataSource{
-    var data = [Movie]()
+    var data = [[Movie]]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "yo", for: indexPath) as! MovieCell
-        let movie = object(at: indexPath)
-        cell.setup(movie)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "yo", for: indexPath) as! HomeCell
+
+        cell.data = data[indexPath.row]
+        if indexPath.row == 0 {
+            cell.title.text = "Now Playing"
+        } else if indexPath.row == 1 {
+            cell.title.text = "Popular"
+        } else if indexPath.row == 2 {
+            cell.title.text = "Top Rated"
+        } else {
+            cell.title.text = "Coming Soon"
+        }
+
+        print(data[indexPath.row])
         return cell
     }
 }
 
 extension RecentMoviesDataSource {
-    func object(at indexPath: IndexPath) -> Movie{
-        return data[indexPath.row]
-    }
-    
-    func update(with data: [Movie]) {
+    func update(with data: [[Movie]]) {
         self.data = data
     }
 }

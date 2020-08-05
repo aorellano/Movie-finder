@@ -21,7 +21,7 @@ class RecentMoviesView: UIView {
         super.init(frame: frame)
         backgroundColor = .backgroundColor
         
-        recentMoviesCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
+        recentMoviesCollectionView.register(HomeCell.self, forCellWithReuseIdentifier: "yo")
         
         setupRecentMoviesStackView()
         setupCollectionView()

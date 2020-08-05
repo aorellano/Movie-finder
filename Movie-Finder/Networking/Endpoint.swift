@@ -39,6 +39,9 @@ enum MovieRecommendation {
     case nowPlaying
     case upcoming
     case cast(movieId: String)
+    case popular
+    case topRated
+    case search(movie: String)
 }
 
 enum ImageType {
@@ -71,6 +74,9 @@ extension MovieRecommendation: Endpoint {
             case .nowPlaying: return "/movie/now_playing"
             case .upcoming: return "movie/upcoming"
             case .cast(let movieId): return "/movie/\(movieId)/credits"
+            case .popular: return "/movie/popular"
+            case .topRated: return "/movie/top_rated"
+            case .search: return "/search/movie"
         }
     }
     
@@ -108,6 +114,22 @@ extension MovieRecommendation: Endpoint {
             return [
                 URLQueryItem(name: "api_key", value: apiKey),
                 URLQueryItem(name: "movie_Id", value: String(movieId))
+            ]
+        case .popular: return [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "language", value: "en-US"),
+                URLQueryItem(name: "region", value: "US")
+            ]
+        case .topRated: return [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "language", value: "en-US"),
+                URLQueryItem(name: "region", value: "US")
+            ]
+        case .search(let movie): return [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "region", value: "US"),
+            URLQueryItem(name: "query", value: movie)
             ]
         }
     }
