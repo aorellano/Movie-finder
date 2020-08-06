@@ -51,7 +51,7 @@ class MovieGenresView: UIView {
         addSubview(headerLabel)
 
         headerLabel.layout(using: [
-            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
             headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
@@ -61,7 +61,7 @@ class MovieGenresView: UIView {
         addSubview(genresTableView)
         
         genresTableView.layout(using: [
-            genresTableView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 40),
+            genresTableView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 30),
             genresTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             genresTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             genresTableView.bottomAnchor.constraint(equalTo: bottomAnchor)

@@ -22,20 +22,27 @@ class TabController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(animated)
         
         let tabOne = HomeController()
-        let tabOneItem = UITabBarItem(title: "Movies", image: UIImage(named: "film"), tag: 0)
+        let tabOneItem = UITabBarItem(title: "Home", image: UIImage(named: "house"), tag: 0)
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: (UIScreen.main.bounds.width/2.25), height: 300)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
     
         let tabTwo = SearchController(collectionViewLayout: layout)
-        let tabThree = MovieGenresController()
         let tabTwoItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), tag: 1)
-        let tabThreeItem = UITabBarItem(title: "Tab 2", image: UIImage(named: "text.justify"), tag: 2)
+        
+        let style = UITableView.Style.plain
+        
+        let tabThree = MovieGenresController()
+        let tabThreeItem = UITabBarItem(title: "Movies", image: UIImage(named: "film"), tag: 2)
+        
+        let tabFour = MenuController(style: style)
+        let tabFourItem = UITabBarItem(title: "Account", image: UIImage(named: "person"), tag: 3)
         
         tabOne.tabBarItem = tabOneItem
         tabTwo.tabBarItem = tabTwoItem
         tabThree.tabBarItem = tabThreeItem
-        self.viewControllers = [tabOne, tabTwo, tabThree]
+        tabFour.tabBarItem = tabFourItem
+        self.viewControllers = [tabOne, tabTwo, tabThree, tabFour]
     }
 
 }

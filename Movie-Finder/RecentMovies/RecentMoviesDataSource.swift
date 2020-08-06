@@ -28,8 +28,6 @@ class RecentMoviesDataSource: NSObject, UICollectionViewDataSource{
         } else {
             cell.title.text = "Coming Soon"
         }
-
-        print(data[indexPath.row])
         return cell
     }
 }

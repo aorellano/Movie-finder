@@ -21,18 +21,13 @@ class HomeController: UIViewController{
     
     var data = [[Movie]]() {
         didSet {
-//            print(self.data.count)
             if data.count == 4 {
-//                print("hi")
                 dataSource.update(with: data)
                 self.homeView.collectionView.reloadData()
-                print(data)
             }
         }
     }
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,11 +35,7 @@ class HomeController: UIViewController{
         client.recommendMovies(from: .nowPlaying) { result in
             switch result {
             case .success(let results):
-                //self.dataSource.update(with: results.results)
-                //self.recentMoviesView.recentMoviesCollectionView.reloadData()
                 self.first = results.results
-                //self.homeView.collectionView.reloadData()
-                //print(results.results)
             case .failure(let error):
                 print(error)
             }
@@ -54,9 +45,6 @@ class HomeController: UIViewController{
             switch result {
             case .success(let results):
                 self.first = results.results
-                //self.homeView.collectionView.reloadData()
-                //self.dataSource.update(with: results.results)
-                //self.homeView.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -66,9 +54,6 @@ class HomeController: UIViewController{
             switch result {
             case .success(let results):
                 self.first = results.results
-                //self.data.append(results.results)
-                //self.dataSource.update(with: results.results)
-                //self.homeView.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -79,24 +64,10 @@ class HomeController: UIViewController{
             case .success(let results):
                 self.first = results.results
                 self.homeView.collectionView.reloadData()
-                //self.data.append(results.results)
-                //self.dataSource.update(with: self.data)
-                //self.homeView.collectionView.reloadData()
-
             case .failure(let error):
                 print(error)
             }
-
-
         }
-       
-        
-        
-        
-        print(data.count)
-        //        dataSource.update(with: data)
-//        self.homeView.collectionView.reloadData()
-
     }
     
     override func loadView() {
@@ -105,7 +76,6 @@ class HomeController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.navigationBar.isHidden = true
         
     }
