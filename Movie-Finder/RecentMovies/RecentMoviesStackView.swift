@@ -12,7 +12,7 @@ class RecentMoviesStackView: UIView {
     let nowPlayingButton: UIButton = {
         let button = UIButton()
         let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
-        button.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "Watch List", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
         button.tag = 0
         
         return button
@@ -21,7 +21,7 @@ class RecentMoviesStackView: UIView {
     let comingSoonButton: UIButton = {
         let button = UIButton()
         let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
-        button.setAttributedTitle(NSAttributedString(string: "Coming Soon", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "Seen It", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
         button.tag = 1
         return button
     }()

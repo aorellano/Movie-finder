@@ -10,57 +10,59 @@ import UIKit
 
 class RecentMoviesController: UIViewController {
     let recentMoviesView = RecentMoviesView()
-    let dataSource = MoviesDataSource()
-    let client = MovieClient()
+//    let dataSource = MoviesDataSource()
+//    let client = MovieClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Tab 1"
-        recentMoviesView.recentMoviesCollectionView.dataSource = dataSource
-        recentMoviesView.recentMoviesCollectionView.delegate = self
-        
+//        self.title = "Tab 1"
+//        recentMoviesView.recentMoviesCollectionView.dataSource = dataSource
+//        recentMoviesView.recentMoviesCollectionView.delegate = self
+//
         recentMoviesView.recentMoviesStackView.nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchDown)
         recentMoviesView.recentMoviesStackView.comingSoonButton.addTarget(self, action: #selector(comingSoonButtonPressed), for: .touchDown)
-        
-        client.recommendMovies(from: .nowPlaying) { result in
-            switch result {
-            case .success(let results):
-                self.dataSource.update(with: results.results)
-                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+//
+//        client.recommendMovies(from: .nowPlaying) { result in
+//            switch result {
+//            case .success(let results):
+//                self.dataSource.update(with: results.results)
+//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     @objc func nowPlayingButtonPressed() {
         buttonPressed(button: recentMoviesView.recentMoviesStackView.nowPlayingButton)
         
-        client.recommendMovies(from: .nowPlaying) { result in
-            switch result {
-            case .success(let results):
-                self.dataSource.update(with: results.results)
-                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        client.recommendMovies(from: .nowPlaying) { result in
+//            switch result {
+//            case .success(let results):
+//                self.dataSource.update(with: results.results)
+//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        print("hi")
     }
     
     @objc func comingSoonButtonPressed() {
         buttonPressed(button: recentMoviesView.recentMoviesStackView.comingSoonButton)
         
-        client.recommendMovies(from: .upcoming) { result in
-            switch result {
-            case .success(let results):
-                self.dataSource.update(with: results.results)
-                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        client.recommendMovies(from: .upcoming) { result in
+//            switch result {
+//            case .success(let results):
+//                self.dataSource.update(with: results.results)
+//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
      
+        print("yo")
     }
     
     func buttonPressed(button: UIButton) {
@@ -71,14 +73,14 @@ class RecentMoviesController: UIViewController {
             recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = true
             
             button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
-            recentMoviesView.recentMoviesStackView.comingSoonButton.setAttributedTitle(NSAttributedString(string: "Coming Soon", attributes: regularColor), for: .normal)
+            recentMoviesView.recentMoviesStackView.comingSoonButton.setAttributedTitle(NSAttributedString(string: "Seen It", attributes: regularColor), for: .normal)
         } else {
             print("there")
             recentMoviesView.recentMoviesStackView.firstUnderline.isHidden = true
             recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = false
             
             button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
-            recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Now Playing", attributes: regularColor), for: .normal)
+            recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Watch List", attributes: regularColor), for: .normal)
         }
     }
 

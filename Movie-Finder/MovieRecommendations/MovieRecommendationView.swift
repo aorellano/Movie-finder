@@ -31,7 +31,7 @@ class MovieRecommendationView: UIView {
         button.backgroundColor = .white
         let image = UIImage(named: "shuffle")
         button.setImage(image, for: .normal)
-        button.layer.cornerRadius = 25
+        button.layer.cornerRadius = 30
         button.layer.shadowOpacity = 0.75
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
         button.layer.shadowColor = UIColor.darkGray.cgColor
@@ -75,8 +75,8 @@ class MovieRecommendationView: UIView {
         movieCollectionView.addSubview(shuffleButton)
         shuffleButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         shuffleButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        shuffleButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        shuffleButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        shuffleButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        shuffleButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
 
     required init?(coder: NSCoder) {

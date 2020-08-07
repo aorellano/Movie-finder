@@ -9,48 +9,95 @@
 import UIKit
 
 class MenuController: UITableViewController {
-    let dataSource = MenuDataSource()
-    let client = MovieClient()
-    var favoriteMovies = ["Jaws", "The Shining", "The godfather", "Star Wars", "E.T."]
-    var movieResults = [Movie]() {
-        didSet {
-            if movieResults.count == 5 {
-                dataSource.update(with: movieResults)
-            }
-        }
-    }
-    override init(style: UITableView.Style) {
-        super.init(style: style)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         
-        tableView.backgroundColor = UIColor.backgroundColor
         tableView.register(MenuCell.self, forCellReuseIdentifier: "menuCell")
-        tableView.dataSource = dataSource
-        tableView.delegate = self
+        tableView.backgroundColor = UIColor.backgroundColor
+        tableView.separatorColor = .darkGray
+        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return 2
+        } else {
+            return 3
+        }
+
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell
         
-        for movie in favoriteMovies {
-            client.recommendMovies(from: .search(movie: movie)) { result in
-                switch result {
-                case .success(let result):
-                    self.movieResults.append(result.results.first!)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-                
-            }
+        cell.textLabel?.textColor = .white
+        
+        if indexPath.section == 0 && indexPath.row == 0 {
+            cell.textLabel?.text = "My Movies"
+            
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            cell.textLabel?.text = "About Us"
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+            cell.textLabel?.text = "Contact Us"
+        } else if indexPath.section == 2 && indexPath.row == 0 {
+            cell.textLabel?.text = "Shipping & Returns"
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+            cell.textLabel?.text = "Privacy Policy"
+        } else if indexPath.section == 2 && indexPath.row == 2 {
+            cell.textLabel?.text = "Terms & Conditions"
+        } else {
+            cell.textLabel?.text = "Login"
+            cell.textLabel?.textAlignment = .center
+        }
+
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let vc = RecentMoviesController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            //cell.textLabel?.text = "About Us"
+        } else if indexPath.section == 1 && indexPath.row == 1 {
+//            let contactController = ContactController()
+//            contactController.modalPresentationStyle = .formSheet
+//            present(contactController, animated: true)
+        } else if indexPath.section == 2 && indexPath.row == 0 {
+//            let shippingController = ShippingController()
+//            shippingController.modalPresentationStyle = .formSheet
+//            self.present(shippingController, animated: true)
+        } else if indexPath.section == 2 && indexPath.row == 1 {
+//            let policyController = PolicyController()
+//            policyController.modalPresentationStyle = .formSheet
+//            self.present(policyController, animated: true)
+        } else if indexPath.section == 2 && indexPath.row == 2 {
+//            let termsController = TermsController()
+//            termsController.modalPresentationStyle = .formSheet
+//            self.present(termsController, animated: true)
         }
     }
+        
     
-
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension MenuController {
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
-    }
-}
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barTintColor = UIColor.backgroundColor
+       
+        
+        tabBarController?.navigationItem.title = "Settings"
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.sizeToFit()
+        
+    }}
 
 

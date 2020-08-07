@@ -19,15 +19,15 @@ class MovieCellView: UIView {
     
     let moviePoster: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .clear
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
         return imageView
     }()
     
-    let movieTitle: UILabel = {
+    var movieTitle: UILabel = {
         let label = UILabel()
-        label.text = "Dummy Code"
+        label.text = ""
         label.backgroundColor = UIColor.backgroundColor
         label.textColor = .white
         label.font = UIFont.collectionViewFont

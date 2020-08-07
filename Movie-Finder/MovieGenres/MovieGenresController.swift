@@ -60,6 +60,9 @@ extension MovieGenresController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! MovieGenreCell
         
         let genreId = dataSource.object(at: indexPath).id
+        //let genreStr = genreIds.map({String($0)})
+        let genre = String(genreId) ?? ""
+        movieRecommendationController.genre = genre
     
         movieRecommendationController.fetchRecommendations(with: [genreId])
         navigationController?.pushViewController(movieRecommendationController, animated: false)

@@ -11,6 +11,7 @@ class MovieRecommendationController: UIViewController {
     let movieRecommendationView = MovieRecommendationView()
     let movieController = MovieController()
     let dataSource = MoviesDataSource()
+    var genre: String!
     let client = MovieClient()
     
     override func viewDidLoad() {
@@ -18,6 +19,7 @@ class MovieRecommendationController: UIViewController {
         
         movieRecommendationView.movieCollectionView.dataSource = dataSource
         movieRecommendationView.movieCollectionView.delegate = self
+        movieRecommendationView.shuffleButton.addTarget(self, action: #selector(shuffleButtonPressed), for: .touchUpInside)
     }
     
     func fetchRecommendations(with genreIds: [Int]) {
@@ -36,6 +38,15 @@ class MovieRecommendationController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    @objc func shuffleButtonPressed() {
+        let vc = ShuffleController()
+        print(genre)
+        vc.genre = genre
+        navigationController?.pushViewController(vc, animated: true)
+        //present(vc, animated: true)
+        print("hi")
     }
     
     override func loadView() {
