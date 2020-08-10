@@ -12,14 +12,18 @@ class ShuffleController: UIViewController {
     let shuffleView = ShuffleView()
     let client = MovieClient()
     var genre: String!
+    var movie: Movie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         shuffleView.buttonsContainerView.shuffleButton.addTarget(self, action: #selector(randomizeMovie), for: .touchUpInside)
         
+        shuffleView.buttonsContainerView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
+        shuffleView.buttonsContainerView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
+        
         UIView.animate(withDuration: 1, animations: {
-            let page = Int.random(in: 1..<80)
+            let page = Int.random(in: 1..<60)
             self.client.recommendMovies(from: .discover(page: String(page), genre: self.genre, sortedBy: "popularity.desc")) { result in
                 switch result{
                 case .success(let recommendations):
@@ -29,6 +33,7 @@ class ShuffleController: UIViewController {
                     self.shuffleView.movieView.movieTitle.text = recommendations.results.first?.title
                     let image = recommendations.results.first?.poster_path ?? ""
                     self.shuffleView.movieView.moviePoster.downloadImage(imageType: .poster, path: image)
+                    self.movie = recommendations.results.first!
                 case .failure(let error):
                     
                     print(error)
@@ -55,6 +60,7 @@ class ShuffleController: UIViewController {
                         self.shuffleView.movieView.movieTitle.text = recommendations.results.first?.title
                         let image = recommendations.results.first?.poster_path ?? ""
                         self.shuffleView.movieView.moviePoster.downloadImage(imageType: .poster, path: image)
+                        self.movie = recommendations.results.first!
                     case .failure(let error):
                         
                         print(error)
@@ -64,6 +70,14 @@ class ShuffleController: UIViewController {
             })
             
         }
+    }
+    
+    @objc func seenItButtonPressed() {
+        Data.seenMovies.append(movie)
+    }
+    
+    @objc func watchItButtonPressed() {
+        Data.watchMovies.append(movie)
     }
     
     override func loadView() {

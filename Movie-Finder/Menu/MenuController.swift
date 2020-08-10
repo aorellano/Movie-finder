@@ -62,7 +62,7 @@ class MenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
-            let vc = RecentMoviesController()
+            let vc = MovieListController()
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.section == 1 && indexPath.row == 0 {
             //cell.textLabel?.text = "About Us"

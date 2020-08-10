@@ -8,10 +8,10 @@
 
 import UIKit
 
-class RecentMoviesView: UIView {
+class MovieListView: UIView {
     let recentMoviesStackView = RecentMoviesStackView()
     
-    let recentMoviesCollectionView: UICollectionView = {
+    let movieListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = UIColor.backgroundColor
         return collectionView
@@ -21,7 +21,8 @@ class RecentMoviesView: UIView {
         super.init(frame: frame)
         backgroundColor = .backgroundColor
         
-        recentMoviesCollectionView.register(HomeCell.self, forCellWithReuseIdentifier: "yo")
+        movieListCollectionView.register(MovieCell
+.self, forCellWithReuseIdentifier: "movieListCell")
         
         setupRecentMoviesStackView()
         setupCollectionView()
@@ -39,13 +40,13 @@ class RecentMoviesView: UIView {
     }
 
     func setupCollectionView() {
-        addSubview(recentMoviesCollectionView)
+        addSubview(movieListCollectionView)
         
-        recentMoviesCollectionView.layout(using: [
-            recentMoviesCollectionView.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor, constant: 40),
-            recentMoviesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            recentMoviesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            recentMoviesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        movieListCollectionView.layout(using: [
+            movieListCollectionView.topAnchor.constraint(equalTo: recentMoviesStackView.bottomAnchor, constant: 40),
+            movieListCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            movieListCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            movieListCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

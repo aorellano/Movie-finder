@@ -8,20 +8,24 @@
 
 import UIKit
 
-class RecentMoviesController: UIViewController {
-    let recentMoviesView = RecentMoviesView()
-//    let dataSource = MoviesDataSource()
+class MovieListController: UIViewController {
+    let movieListView = MovieListView()
+    let dataSource = MovieListDataSource()
 //    let client = MovieClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        self.title = "Tab 1"
-//        recentMoviesView.recentMoviesCollectionView.dataSource = dataSource
+        movieListView.movieListCollectionView.dataSource = dataSource
 //        recentMoviesView.recentMoviesCollectionView.delegate = self
 //
-        recentMoviesView.recentMoviesStackView.nowPlayingButton.addTarget(self, action: #selector(nowPlayingButtonPressed), for: .touchDown)
-        recentMoviesView.recentMoviesStackView.comingSoonButton.addTarget(self, action: #selector(comingSoonButtonPressed), for: .touchDown)
+        movieListView.recentMoviesStackView.watchListButton.addTarget(self, action: #selector(watchListButtonPressed), for: .touchUpInside)
+        movieListView.recentMoviesStackView.seenListButton.addTarget(self, action: #selector(seenListButtonPressed), for: .touchUpInside)
+        
+        dataSource.update(with: Data.watchMovies)
+        movieListView.movieListCollectionView.reloadData()
+        movieListView.movieListCollectionView.delegate = self
 //
 //        client.recommendMovies(from: .nowPlaying) { result in
 //            switch result {
@@ -34,8 +38,11 @@ class RecentMoviesController: UIViewController {
 //        }
     }
     
-    @objc func nowPlayingButtonPressed() {
-        buttonPressed(button: recentMoviesView.recentMoviesStackView.nowPlayingButton)
+    @objc func watchListButtonPressed() {
+        buttonPressed(button: movieListView.recentMoviesStackView.watchListButton)
+        dataSource.update(with:  Data.watchMovies)
+        movieListView.movieListCollectionView.reloadData()
+        //send datasource array of movies you want to watch
         
 //        client.recommendMovies(from: .nowPlaying) { result in
 //            switch result {
@@ -49,9 +56,11 @@ class RecentMoviesController: UIViewController {
         print("hi")
     }
     
-    @objc func comingSoonButtonPressed() {
-        buttonPressed(button: recentMoviesView.recentMoviesStackView.comingSoonButton)
-        
+    @objc func seenListButtonPressed() {
+        buttonPressed(button: movieListView.recentMoviesStackView.seenListButton)
+        dataSource.update(with: Data.seenMovies)
+        movieListView.movieListCollectionView.reloadData()
+        //send datasource array of movie you have seen
 //        client.recommendMovies(from: .upcoming) { result in
 //            switch result {
 //            case .success(let results):
@@ -69,18 +78,18 @@ class RecentMoviesController: UIViewController {
         let highlightedColor = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
         let regularColor = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
         if button.tag == 0 {
-            recentMoviesView.recentMoviesStackView.firstUnderline.isHidden = false
-            recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = true
+            movieListView.recentMoviesStackView.firstUnderline.isHidden = false
+            movieListView.recentMoviesStackView.secondUnderline.isHidden = true
             
             button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
-            recentMoviesView.recentMoviesStackView.comingSoonButton.setAttributedTitle(NSAttributedString(string: "Seen It", attributes: regularColor), for: .normal)
+            movieListView.recentMoviesStackView.seenListButton.setAttributedTitle(NSAttributedString(string: "Seen It", attributes: regularColor), for: .normal)
         } else {
             print("there")
-            recentMoviesView.recentMoviesStackView.firstUnderline.isHidden = true
-            recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = false
+            movieListView.recentMoviesStackView.firstUnderline.isHidden = true
+            movieListView.recentMoviesStackView.secondUnderline.isHidden = false
             
             button.setAttributedTitle(NSAttributedString(string: (button.titleLabel?.text)!, attributes: highlightedColor), for: .normal)
-            recentMoviesView.recentMoviesStackView.nowPlayingButton.setAttributedTitle(NSAttributedString(string: "Watch List", attributes: regularColor), for: .normal)
+            movieListView.recentMoviesStackView.watchListButton.setAttributedTitle(NSAttributedString(string: "Watch List", attributes: regularColor), for: .normal)
         }
     }
 
@@ -88,17 +97,17 @@ class RecentMoviesController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = true
-        recentMoviesView.recentMoviesStackView.secondUnderline.isHidden = true
+        movieListView.recentMoviesStackView.secondUnderline.isHidden = true
         
     }
     
 
     override func loadView() {
-        view = recentMoviesView
+        view = movieListView
     }
 }
 
-extension RecentMoviesController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MovieListController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width/2.1), height: 300)

@@ -9,7 +9,7 @@
 import UIKit
 
 class RecentMoviesStackView: UIView {
-    let nowPlayingButton: UIButton = {
+    let watchListButton: UIButton = {
         let button = UIButton()
         let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.highlightColor]
         button.setAttributedTitle(NSAttributedString(string: "Watch List", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
@@ -18,7 +18,7 @@ class RecentMoviesStackView: UIView {
         return button
     }()
     
-    let comingSoonButton: UIButton = {
+    let seenListButton: UIButton = {
         let button = UIButton()
         let attributes = [NSAttributedString.Key.font: UIFont.genreFont, NSAttributedString.Key.foregroundColor: UIColor.white]
         button.setAttributedTitle(NSAttributedString(string: "Seen It", attributes: attributes as [NSAttributedString.Key : Any]), for: .normal)
@@ -27,7 +27,7 @@ class RecentMoviesStackView: UIView {
     }()
     
     lazy var recentMoviesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nowPlayingButton, comingSoonButton])
+        let stackView = UIStackView(arrangedSubviews: [watchListButton, seenListButton])
         stackView.alignment = .fill
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -65,22 +65,22 @@ class RecentMoviesStackView: UIView {
     }
 
     func setupUnderlines() {
-        let nowPlayingButton = recentMoviesStackView.arrangedSubviews[0]
-        let comingSoonButton = recentMoviesStackView.arrangedSubviews[1]
-        nowPlayingButton.addSubview(firstUnderline)
-        comingSoonButton.addSubview(secondUnderline)
+        let watchListButton = recentMoviesStackView.arrangedSubviews[0]
+        let seenListButton = recentMoviesStackView.arrangedSubviews[1]
+        watchListButton.addSubview(firstUnderline)
+        seenListButton.addSubview(secondUnderline)
         
         firstUnderline.layout(using: [
-            firstUnderline.leadingAnchor.constraint(equalTo: nowPlayingButton.leadingAnchor, constant: 40),
-            firstUnderline.trailingAnchor.constraint(equalTo: nowPlayingButton.trailingAnchor, constant: -40),
-            firstUnderline.topAnchor.constraint(equalTo: nowPlayingButton.bottomAnchor, constant: -5),
+            firstUnderline.leadingAnchor.constraint(equalTo: watchListButton .leadingAnchor, constant: 40),
+            firstUnderline.trailingAnchor.constraint(equalTo: watchListButton .trailingAnchor, constant: -40),
+            firstUnderline.topAnchor.constraint(equalTo: watchListButton .bottomAnchor, constant: -5),
             firstUnderline.heightAnchor.constraint(equalToConstant: 1.5)
         ])
         
         secondUnderline.layout(using: [
-            secondUnderline.leadingAnchor.constraint(equalTo: comingSoonButton.leadingAnchor, constant: 40),
-            secondUnderline.trailingAnchor.constraint(equalTo: comingSoonButton.trailingAnchor, constant: -40),
-            secondUnderline.topAnchor.constraint(equalTo: comingSoonButton.bottomAnchor, constant: -5),
+            secondUnderline.leadingAnchor.constraint(equalTo: seenListButton.leadingAnchor, constant: 40),
+            secondUnderline.trailingAnchor.constraint(equalTo: seenListButton.trailingAnchor, constant: -40),
+            secondUnderline.topAnchor.constraint(equalTo: seenListButton.bottomAnchor, constant: -5),
             secondUnderline.heightAnchor.constraint(equalToConstant: 1.5)
         ])
     }

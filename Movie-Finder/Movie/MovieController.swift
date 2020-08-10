@@ -13,6 +13,7 @@ class MovieController: UIViewController {
     var movie: Movie!
     var client = MovieClient()
     var dataSource = ActorsDataSource()
+    var listDataSource = MovieListDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,18 @@ class MovieController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+        
+        movieView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
+        
+        movieView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc func seenItButtonPressed() {
+        Data.seenMovies.append(movie)
+    }
+    
+    @objc func watchItButtonPressed() {
+        Data.watchMovies.append(movie)
     }
 
     override func loadView() {
