@@ -14,9 +14,137 @@
             filePath = "Movie-Finder/Movie/MovieController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "playTrailer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57906158-4A0F-4312-B916-0E553D6FDA82"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie-Finder/SimilarMovies/SimilarMoviesDataSource.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - ab04f31a0a4c2c0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Movie_Finder.SimilarMoviesController.viewDidLoad() -&gt; ()"
+                  moduleName = "Movie-Finder"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisorellano/Desktop/Movie-Finder/Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "738">
+               </Location>
+               <Location
+                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - 9e301d0ca8746591"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Movie_Finder.Result&lt;Movie_Finder.MovieList, Movie_Finder.APIError&gt;) -&gt; () in Movie_Finder.SimilarMoviesController.viewDidLoad() -&gt; ()"
+                  moduleName = "Movie-Finder"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisorellano/Desktop/Movie-Finder/Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "161">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - 9e301d0ca8746591"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Movie_Finder.Result&lt;Movie_Finder.MovieList, Movie_Finder.APIError&gt;) -&gt; () in Movie_Finder.SimilarMoviesController.viewDidLoad() -&gt; ()"
+                  moduleName = "Movie-Finder"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisorellano/Desktop/Movie-Finder/Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "161">
+               </Location>
+               <Location
+                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - 9e301d0ca8746591"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Movie_Finder.Result&lt;Movie_Finder.MovieList, Movie_Finder.APIError&gt;) -&gt; () in Movie_Finder.SimilarMoviesController.viewDidLoad() -&gt; ()"
+                  moduleName = "Movie-Finder"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisorellano/Desktop/Movie-Finder/Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "179">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D011A628-7BC5-42C9-BE80-AE6D96A23AF4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie-Finder/SimilarMovies/SimilarMoviesController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

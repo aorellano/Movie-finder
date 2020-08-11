@@ -23,15 +23,7 @@ class MovieController: UIViewController {
         movieView.setup(movie)
         print(movie.title)
         
-        client.getCast(from: .cast(movieId: String(movie.id))) { result in
-            switch result {
-            case .success(let results):
-                self.dataSource.update(with: results.cast)
-                self.movieView.actorsCollectionView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+
          movieView.playButton.addTarget(self, action: #selector(playTrailer), for: .touchUpInside)
         movieView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
         
@@ -40,6 +32,7 @@ class MovieController: UIViewController {
        
         
         movieView.playerView.delegate = self
+        movieView.movieDescriptionView.similarMoviesButton.addTarget(self, action: #selector(findSimilarMovies), for: .touchUpInside)
        // movieView.playerView.load(withVideoId: <#T##String#>)
        // movieView.playerView.webView(<#T##webView: WKWebView##WKWebView#>, didFinish: <#T##WKNavigation!#>)
 
@@ -74,10 +67,27 @@ class MovieController: UIViewController {
         
     }
     
+    @objc func findSimilarMovies() {
+        let vc = SimilarMoviesController()
+        vc.movieId = movie.id
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         movieView.setup(movie)
         movieView.playerView.isHidden = true
+        client.getCast(from: .cast(movieId: String(movie.id))) { result in
+            switch result {
+            case .success(let results):
+                self.dataSource.update(with: results.cast)
+                print(self.movie.id)
+                self.movieView.actorsCollectionView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        movieView.actorsCollectionView.reloadData()
     }
 
 }

@@ -20,6 +20,8 @@ class MovieRecommendationController: UIViewController {
         movieRecommendationView.movieCollectionView.dataSource = dataSource
         movieRecommendationView.movieCollectionView.delegate = self
         movieRecommendationView.shuffleButton.addTarget(self, action: #selector(shuffleButtonPressed), for: .touchUpInside)
+        
+        movieRecommendationView.movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
     }
     
     func fetchRecommendations(with genreIds: [Int]) {

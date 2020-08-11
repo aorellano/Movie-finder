@@ -42,7 +42,7 @@ class MovieRecommendationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
+        
         
         backgroundColor = UIColor.backgroundColor
         

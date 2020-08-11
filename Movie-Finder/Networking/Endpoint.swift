@@ -80,7 +80,7 @@ extension MovieRecommendation: Endpoint {
             case .topRated: return "/movie/top_rated"
             case .search: return "/search/movie"
             case .video(let movieId): return "/movie/\(movieId)/videos"
-            case .similar(let movieId): return "/movie/\(similar)/videos"
+            case .similar(let movieId): return "/movie/\(movieId)/similar"
         }
     }
     
