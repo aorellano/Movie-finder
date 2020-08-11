@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YoutubePlayer_in_WKWebView
 
 class MovieController: UIViewController {
     let movieView = MovieView()
@@ -31,10 +32,33 @@ class MovieController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-        
+         movieView.playButton.addTarget(self, action: #selector(playTrailer), for: .touchUpInside)
         movieView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
         
         movieView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
+        
+       
+        
+        movieView.playerView.delegate = self
+       // movieView.playerView.load(withVideoId: <#T##String#>)
+       // movieView.playerView.webView(<#T##webView: WKWebView##WKWebView#>, didFinish: <#T##WKNavigation!#>)
+
+    }
+    
+    @objc func playTrailer() {
+        print("hi")
+        client.getVideo(from: .video(movieId: String(movie.id))) { result in
+            switch result {
+            case .success(let results):
+                print(results.results ?? "")
+                let videoKey = results.results.first?.key ?? ""
+                self.movieView.playerView.isHidden = false
+                self.movieView.playerView.load(withVideoId: videoKey)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+
     }
     
     @objc func seenItButtonPressed() {
@@ -53,6 +77,16 @@ class MovieController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         movieView.setup(movie)
+        movieView.playerView.isHidden = true
     }
 
+}
+
+extension MovieController: WKYTPlayerViewDelegate {
+    func playerView(_ playerView: WKYTPlayerView, didChangeTo state: WKYTPlayerState) {
+        if state == .paused || state == .ended {
+            movieView.playerView.isHidden = true
+        }
+    }
+    
 }

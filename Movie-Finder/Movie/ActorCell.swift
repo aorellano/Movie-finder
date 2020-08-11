@@ -14,7 +14,7 @@ class ActorCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = image
         imageView.backgroundColor = .blue
-        imageView.layer.cornerRadius = 40
+        imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -48,8 +48,8 @@ class ActorCell: UICollectionViewCell {
         addSubview(actorImage)
         
         actorImage.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        actorImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        actorImage.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        actorImage.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        actorImage.widthAnchor.constraint(equalToConstant: 70).isActive = true
         actorImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     

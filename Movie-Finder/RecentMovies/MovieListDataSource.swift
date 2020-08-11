@@ -10,14 +10,15 @@ import UIKit
 
 class MovieListDataSource: NSObject, UICollectionViewDataSource {
     var data = [Movie]()
+    var watchList: Bool!
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieListCell", for: indexPath) as! MovieCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "movieListCell", for: indexPath) as! MovieListCell
         let movie = object(at: indexPath)
-        cell.setup(movie)
+        cell.setup(movie, watchList)
         return cell
     }
 }

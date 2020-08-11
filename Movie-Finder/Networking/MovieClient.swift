@@ -62,6 +62,14 @@ class MovieClient: APIClient {
         }, completion: completion)
     }
     
-    
-    
+    func getVideo(from type: MovieRecommendation, completion: @escaping (Result<VideoList, APIError>) -> Void) {
+        let request = type.request
+        
+        fetch(with: request, decode: { json -> VideoList? in
+            guard let videoList = json as? VideoList else { return nil }
+            return videoList
+            
+        }, completion: completion)
+    }
+
 }

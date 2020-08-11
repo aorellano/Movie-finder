@@ -57,6 +57,20 @@ class MovieDescriptionView: UIView {
         return label
     }()
     
+    let similarMoviesButton: UIButton = {
+        let button = UIButton()
+        var attrs : [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14.0, weight: .medium),
+            NSAttributedString.Key.foregroundColor : UIColor.systemBlue,
+            //NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue
+        ]
+        
+        let attrubutedString = NSAttributedString(string: "Similar Movies", attributes: attrs)
+        button.setAttributedTitle(attrubutedString, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let plot: UILabel = {
         let label = UILabel()
         label.text = "Title"
@@ -126,6 +140,10 @@ class MovieDescriptionView: UIView {
             descriptionTitle.topAnchor.constraint(equalTo: movieYear.bottomAnchor, constant: 25),
             descriptionTitle.leadingAnchor.constraint(equalTo: title.leadingAnchor)
         ])
+        
+        addSubview(similarMoviesButton)
+        similarMoviesButton.centerYAnchor.constraint(equalTo: descriptionTitle.centerYAnchor).isActive = true
+        similarMoviesButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         
     }
     

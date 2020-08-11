@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Cosmos
+import TinyConstraints
 
 class MovieListView: UIView {
     let recentMoviesStackView = RecentMoviesStackView()
@@ -21,7 +23,7 @@ class MovieListView: UIView {
         super.init(frame: frame)
         backgroundColor = .backgroundColor
         
-        movieListCollectionView.register(MovieCell
+        movieListCollectionView.register(MovieListCell
 .self, forCellWithReuseIdentifier: "movieListCell")
         
         setupRecentMoviesStackView()

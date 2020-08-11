@@ -1,0 +1,24 @@
+PODS:
+  - Cosmos (17.0.0)
+  - TinyConstraints (3.3.0)
+  - YoutubePlayer-in-WKWebView (0.2.3)
+
+DEPENDENCIES:
+  - Cosmos
+  - TinyConstraints
+  - YoutubePlayer-in-WKWebView (~> 0.2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Cosmos
+    - TinyConstraints
+    - YoutubePlayer-in-WKWebView
+
+SPEC CHECKSUMS:
+  Cosmos: 309e489f21ffc91a1eeecfebef7f817cd2fcfba6
+  TinyConstraints: 6d0e495e72372556b31a0cc9b60983d5f780ef2f
+  YoutubePlayer-in-WKWebView: 9cfe2a1208c91f82d5cc5eaff1f0dfc8552dd3f1
+
+PODFILE CHECKSUM: d91bd64d34ec86a30f491a3e05e9e8ee61ddcb97
+
+COCOAPODS: 1.7.5

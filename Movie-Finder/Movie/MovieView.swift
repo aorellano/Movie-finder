@@ -7,12 +7,34 @@
 //
 
 import UIKit
+import YoutubePlayer_in_WKWebView
+
 
 class MovieView: UIView {
+    var playButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "play")
+        button.layer.cornerRadius = 20
+        button.setImage(image, for: .normal)
+        button.backgroundColor = .white
+        button.layer.shadowOpacity = 0.75
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     var movieBackdrop: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .blue
         return imageView
+    }()
+    
+    var playerView: WKYTPlayerView = {
+        let player = WKYTPlayerView()
+        
+        player.translatesAutoresizingMaskIntoConstraints = false
+        return player
     }()
     
     let movieDescriptionView: MovieDescriptionView = {
@@ -34,7 +56,7 @@ class MovieView: UIView {
     let actorsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 110, height: 100)
+        layout.itemSize = CGSize(width: 90, height: 90)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         collectionView.register(ActorCell.self, forCellWithReuseIdentifier: "actorCell")
@@ -88,6 +110,14 @@ class MovieView: UIView {
             movieBackdrop.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             movieBackdrop.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant:  -UIScreen.main.bounds.height/2)
         ])
+//        
+        addSubview(playerView)
+        playerView.leadingAnchor.constraint(equalTo: movieBackdrop.leadingAnchor).isActive = true
+        playerView.trailingAnchor.constraint(equalTo: movieBackdrop.trailingAnchor).isActive = true
+        playerView.topAnchor.constraint(equalTo: movieBackdrop.topAnchor).isActive = true
+        playerView.bottomAnchor.constraint(equalTo: movieBackdrop.bottomAnchor, constant: -100).isActive = true
+        
+      
     }
     
     func setupMovieDescriptionView() {
@@ -97,8 +127,14 @@ class MovieView: UIView {
             movieDescriptionView.heightAnchor.constraint(equalToConstant: 300),
             movieDescriptionView.leadingAnchor.constraint(equalTo: movieBackdrop.leadingAnchor),
             movieDescriptionView.trailingAnchor.constraint(equalTo: movieBackdrop.trailingAnchor),
-            movieDescriptionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant:  UIScreen.main.bounds.height/3.2)
+            movieDescriptionView.topAnchor.constraint(equalTo: topAnchor, constant:  UIScreen.main.bounds.height/3.2)
         ])
+        
+        addSubview(playButton)
+              playButton.bottomAnchor.constraint(equalTo: movieDescriptionView.topAnchor, constant: -10).isActive = true
+              playButton.trailingAnchor.constraint(equalTo: movieBackdrop.trailingAnchor, constant: -10).isActive = true
+              playButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+              playButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupButtons() {
