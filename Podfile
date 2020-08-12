@@ -9,5 +9,7 @@ target 'Movie-Finder' do
   pod "YoutubePlayer-in-WKWebView", "~> 0.2.0"
   pod 'Cosmos'
   pod 'TinyConstraints'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end

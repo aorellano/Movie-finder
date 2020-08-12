@@ -23,7 +23,7 @@ class ShuffleController: UIViewController {
         shuffleView.buttonsContainerView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
         
         UIView.animate(withDuration: 1, animations: {
-            let page = Int.random(in: 1..<60)
+            let page = Int.random(in: 1..<50)
             self.client.recommendMovies(from: .discover(page: String(page), genre: self.genre, sortedBy: "popularity.desc")) { result in
                 switch result{
                 case .success(let recommendations):

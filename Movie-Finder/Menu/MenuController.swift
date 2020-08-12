@@ -20,18 +20,15 @@ class MenuController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else if section == 1 {
-            return 2
         } else {
             return 3
         }
-
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,18 +40,11 @@ class MenuController: UITableViewController {
             cell.textLabel?.text = "My Movies"
             
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            cell.textLabel?.text = "About Us"
+            cell.textLabel?.text = "Buy full version"
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            cell.textLabel?.text = "Contact Us"
-        } else if indexPath.section == 2 && indexPath.row == 0 {
-            cell.textLabel?.text = "Shipping & Returns"
-        } else if indexPath.section == 2 && indexPath.row == 1 {
-            cell.textLabel?.text = "Privacy Policy"
-        } else if indexPath.section == 2 && indexPath.row == 2 {
-            cell.textLabel?.text = "Terms & Conditions"
+            cell.textLabel?.text = "Themes"
         } else {
             cell.textLabel?.text = "Login"
-            cell.textLabel?.textAlignment = .center
         }
 
         return cell
@@ -67,22 +57,13 @@ class MenuController: UITableViewController {
         } else if indexPath.section == 1 && indexPath.row == 0 {
             //cell.textLabel?.text = "About Us"
         } else if indexPath.section == 1 && indexPath.row == 1 {
-//            let contactController = ContactController()
-//            contactController.modalPresentationStyle = .formSheet
-//            present(contactController, animated: true)
-        } else if indexPath.section == 2 && indexPath.row == 0 {
-//            let shippingController = ShippingController()
-//            shippingController.modalPresentationStyle = .formSheet
-//            self.present(shippingController, animated: true)
-        } else if indexPath.section == 2 && indexPath.row == 1 {
-//            let policyController = PolicyController()
-//            policyController.modalPresentationStyle = .formSheet
-//            self.present(policyController, animated: true)
-        } else if indexPath.section == 2 && indexPath.row == 2 {
-//            let termsController = TermsController()
-//            termsController.modalPresentationStyle = .formSheet
-//            self.present(termsController, animated: true)
+            let vc = LoginController()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = LoginController()
+            navigationController?.pushViewController(vc, animated: true)
         }
+
     }
         
     
