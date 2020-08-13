@@ -13,22 +13,22 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addButtonTargets()
+        createLoginRegisterButtonTarget()
     }
     
-    func addButtonTargets() {
-        loginView.loginRegisterButton.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
+    func createLoginRegisterButtonTarget() {
+        loginView.loginRegisterButton.addTarget(self, action: #selector(handleLoginRegisterButton), for: .touchUpInside)
     }
     
-    @objc func handleLoginRegister() {
+    @objc func handleLoginRegisterButton() {
         if loginView.loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            handleLogin()
+            loginButtonPressed()
         } else {
-            handleRegister()
+            registerButtonPressed()
         }
     }
     
-    func handleLogin() {
+    func loginButtonPressed() {
         guard let email = loginView.inputsContainerView.emailTextField.text, let password = loginView.inputsContainerView.passwordTextField.text else {
             print("Form is not valid")
             return
@@ -42,7 +42,7 @@ class LoginController: UIViewController {
         })
     }
     
-    @objc func handleRegister() {
+    @objc func registerButtonPressed() {
         guard let name = loginView.inputsContainerView.nameTextField.text, let email = loginView.inputsContainerView.emailTextField.text, let password = loginView.inputsContainerView.passwordTextField.text else {
             print("Form is not valid")
             return
@@ -69,13 +69,13 @@ class LoginController: UIViewController {
             })
         })
     }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
