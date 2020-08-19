@@ -10,14 +10,19 @@ import UIKit
 
 class HomeCell: UICollectionViewCell{
     let dataSource = HomeDataSource()
-    
+    var presentMovie: ((Movie) -> Void)?
+
     var data = [Movie](){
         didSet {
             dataSource.update(with: data)
         }
     }
     
-    let title: UILabel = {
+    func setupSectionTitle(with title: String) {
+        self.title.text = title
+    }
+    
+    var title: UILabel = {
         let label = UILabel()
         label.text = "Section Title"
         label.font = UIFont.genreFont
@@ -31,7 +36,7 @@ class HomeCell: UICollectionViewCell{
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width/2.8, height: UIScreen.main.bounds.height/3.5)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "hi")
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "categoryMovie")
         collectionView.backgroundColor = UIColor.backgroundColor
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,10 +46,14 @@ class HomeCell: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.backgroundColor
-        collectionView.dataSource = dataSource
+        setupCell()
         setupTitle()
         setupCollectionView()
+    }
+    
+    func setupCell() {
+        backgroundColor = UIColor.backgroundColor
+        collectionView.delegate = self
         collectionView.dataSource = dataSource
         dataSource.update(with: data)
     }
@@ -62,11 +71,15 @@ class HomeCell: UICollectionViewCell{
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-    
 
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension HomeCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = dataSource.movies[indexPath.row]
+        presentMovie?(movie)
     }
 }

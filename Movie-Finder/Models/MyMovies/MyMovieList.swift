@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Data {
+class MyMovieList {
     static var watchMovies = [Movie]()
     static var seenMovies = [Movie]()
 }

@@ -36,7 +36,6 @@ class LoginView: UIView {
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
-
         return button
     }()
     
@@ -53,7 +52,6 @@ class LoginView: UIView {
     
     func setupHeaderLabel() {
         addSubview(headerLabel)
-           
         headerLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
         headerLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
        }
@@ -65,7 +63,6 @@ class LoginView: UIView {
         inputsContainerView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, constant: -24).isActive = true
         
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 180)
-               
         inputsContainerViewHeightAnchor?.isActive = true
     }
     

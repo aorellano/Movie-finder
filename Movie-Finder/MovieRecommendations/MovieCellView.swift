@@ -37,6 +37,7 @@ class MovieCellView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        backgroundColor = UIColor.backgroundColor
         setupContainer()
         setupMovieTitle()
         setupMoviePoster()

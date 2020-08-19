@@ -17,15 +17,21 @@ class MovieRecommendationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
+        setupButtonTargets()
+    }
+    
+    func setupCollectionView() {
         movieRecommendationView.movieCollectionView.dataSource = dataSource
         movieRecommendationView.movieCollectionView.delegate = self
         movieRecommendationView.shuffleButton.addTarget(self, action: #selector(shuffleButtonPressed), for: .touchUpInside)
-        
-        movieRecommendationView.movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
+    }
+    
+    func setupButtonTargets() {
+         movieRecommendationView.movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
     }
     
     func fetchRecommendations(with genreIds: [Int]) {
-        
         let genreStr = genreIds.map({String($0)})
         let genre = genreStr.first ?? ""
         
@@ -47,8 +53,6 @@ class MovieRecommendationController: UIViewController {
         print(genre)
         vc.genre = genre
         navigationController?.pushViewController(vc, animated: true)
-        //present(vc, animated: true)
-        print("hi")
     }
     
     override func loadView() {
@@ -69,9 +73,7 @@ extension MovieRecommendationController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = dataSource.data[indexPath.row]
         movieController.movie = movie
-        navigationController?.pushViewController(movieController, animated: true)
-        print(movie.title)
-        
+        navigationController?.pushViewController(movieController, animated: true)        
     }
 }
 

@@ -55,11 +55,13 @@ class MovieController: UIViewController {
     }
     
     @objc func seenItButtonPressed() {
-        Data.seenMovies.append(movie)
+        //MyMovieList.seenMovies.append(movie)
+        MovieListFunctions.createSeenMovie(movie)
     }
     
     @objc func watchItButtonPressed() {
-        Data.watchMovies.append(movie)
+        //MyMovieList.watchMovies.append(movie)
+        MovieListFunctions.createWatchMovie(movie)
     }
 
     override func loadView() {

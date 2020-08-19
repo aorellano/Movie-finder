@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Movie: Decodable {
+struct Movie: Decodable, Equatable {
     var id: Int
     var title: String
     var poster_path: String?

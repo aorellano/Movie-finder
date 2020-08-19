@@ -23,19 +23,10 @@ class MovieGenresView: UIView {
         let tableView = UITableView()
         tableView.register(MovieGenreCell.self, forCellReuseIdentifier: "cellId")
         tableView.backgroundColor = UIColor.backgroundColor
+        tableView.separatorColor = UIColor.backgroundColor
         tableView.layer.cornerRadius = 30
         tableView.allowsMultipleSelection = true
         return tableView
-    }()
-    
-    let selectButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor.tintColor
-        button.layer.cornerRadius = 10
-        button.isHidden = true
-        button.addTarget(self, action: #selector(MovieGenresController.genresSelected), for: .touchUpInside)
-        button.setTitle("Select", for: .normal)
-        return button
     }()
     
     override init(frame: CGRect) {
@@ -44,16 +35,15 @@ class MovieGenresView: UIView {
         backgroundColor = UIColor.backgroundColor
         setupHeaderLabel()
         setupTableView()
-        setupSelectButton()
     }
     
     fileprivate func setupHeaderLabel() {
         addSubview(headerLabel)
 
         headerLabel.layout(using: [
-            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
     }
     
@@ -65,18 +55,6 @@ class MovieGenresView: UIView {
             genresTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             genresTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             genresTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-
-    fileprivate func setupSelectButton() {
-        genresTableView.addSubview(selectButton)
-        
-        selectButton.layout(using: [
-            selectButton.topAnchor.constraint(equalTo: genresTableView.bottomAnchor, constant: 15),
-            selectButton.heightAnchor.constraint(equalToConstant: 60),
-            selectButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-            selectButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            selectButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

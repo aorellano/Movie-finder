@@ -23,7 +23,7 @@ class MovieListController: UIViewController {
         movieListView.recentMoviesStackView.watchListButton.addTarget(self, action: #selector(watchListButtonPressed), for: .touchUpInside)
         movieListView.recentMoviesStackView.seenListButton.addTarget(self, action: #selector(seenListButtonPressed), for: .touchUpInside)
         
-        dataSource.update(with: Data.watchMovies)
+        dataSource.update(with: MyMovieList.watchMovies)
         dataSource.watchList = false
         movieListView.movieListCollectionView.reloadData()
         movieListView.movieListCollectionView.delegate = self
@@ -41,7 +41,7 @@ class MovieListController: UIViewController {
     
     @objc func watchListButtonPressed() {
         buttonPressed(button: movieListView.recentMoviesStackView.watchListButton)
-        dataSource.update(with:  Data.watchMovies)
+        dataSource.update(with:  MyMovieList.watchMovies)
         movieListView.movieListCollectionView.reloadData()
         dataSource.watchList = false
         //send datasource array of movies you want to watch
@@ -60,7 +60,7 @@ class MovieListController: UIViewController {
     
     @objc func seenListButtonPressed() {
         buttonPressed(button: movieListView.recentMoviesStackView.seenListButton)
-        dataSource.update(with: Data.seenMovies)
+        dataSource.update(with: MyMovieList.seenMovies)
         movieListView.movieListCollectionView.reloadData()
         dataSource.watchList = true
         //send datasource array of movie you have seen

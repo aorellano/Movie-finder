@@ -9,8 +9,7 @@
 import UIKit
 
 class MovieGenresDataSource: NSObject {
-    var data = [Genre]()
-    var selectedData = [Int]()
+    var movies = [Genre]()
     
     override init() {
         super.init()
@@ -19,7 +18,7 @@ class MovieGenresDataSource: NSObject {
 
 extension MovieGenresDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,28 +33,11 @@ extension MovieGenresDataSource: UITableViewDataSource {
 
 extension MovieGenresDataSource {
     func object(at indexPath: IndexPath) -> Genre {
-        return data[indexPath.row]
+        return movies[indexPath.row]
     }
     
     func update(with data: [Genre]) {
-        self.data = data
+        self.movies = data
     }
-    
-    func add(id: Int) {
-        self.selectedData.append(id)
-    }
-    
-    func remove(id: Int) {
-        self.selectedData.removeAll(where: {$0 == id})
-    }
-    
-//    func genreIds() -> [Int] {
-//        var genreIds = [Int]()
-//        for genre in selectedData {
-//            print("man\(genre.id)")
-//            genreIds.append(genre.id)
-//        }
-//        return genreIds
-//    }
 }
 

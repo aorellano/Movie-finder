@@ -36,9 +36,9 @@ class ShuffleView: UIView {
     
     func setupHeaderLabel() {
         addSubview(headerLabel)
-        headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
-        headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80).isActive = true
+        headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
+        headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30).isActive = true
     }
     
     func setupMovieView() {

@@ -106,9 +106,9 @@ class MovieView: UIView {
         
         movieBackdrop.layout(using: [
             movieBackdrop.topAnchor.constraint(equalTo: topAnchor),
-            movieBackdrop.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            movieBackdrop.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            movieBackdrop.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant:  -UIScreen.main.bounds.height/2)
+            movieBackdrop.leadingAnchor.constraint(equalTo: leadingAnchor),
+            movieBackdrop.trailingAnchor.constraint(equalTo: trailingAnchor),
+            movieBackdrop.bottomAnchor.constraint(equalTo: bottomAnchor, constant:  -UIScreen.main.bounds.height/2)
         ])
 //        
         addSubview(playerView)

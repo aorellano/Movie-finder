@@ -21,7 +21,6 @@ class MovieRecommendationView: UIView {
 
     let movieCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        
         collectionView.backgroundColor = UIColor.backgroundColor
         return collectionView
     }()
@@ -41,23 +40,20 @@ class MovieRecommendationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        
+
         backgroundColor = UIColor.backgroundColor
         
         setupHeaderLabel()
         setupCollectionView()
         setupButton()
-
     }
     
     func setupHeaderLabel() {
         addSubview(headerLabel)
         headerLabel.layout(using: [
-            headerLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 40),
-            headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -30)
+            headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
         ])
     }
     
@@ -65,8 +61,8 @@ class MovieRecommendationView: UIView {
         addSubview(movieCollectionView)
         movieCollectionView.layout(using: [
             movieCollectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 20),
-            movieCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15),
-            movieCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15),
+            movieCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            movieCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             movieCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }

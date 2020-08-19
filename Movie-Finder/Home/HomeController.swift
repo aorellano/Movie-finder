@@ -8,21 +8,13 @@
 
 import UIKit
 
-class HomeController: UIViewController{
+class HomeController: UIViewController {
     let homeView = HomeView()
     let client = MovieClient()
-    let dataSource = RecentMoviesDataSource()
-    var first = [Movie]() {
+    var sectionTitles = [String]()
+    var movies = [[Movie]]() {
         didSet {
-            data.append(first)
-
-        }
-    }
-    
-    var data = [[Movie]]() {
-        didSet {
-            if data.count == 4 {
-                dataSource.update(with: data)
+            if movies.count == 4 {
                 self.homeView.collectionView.reloadData()
             }
         }
@@ -31,39 +23,56 @@ class HomeController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeView.collectionView.dataSource = dataSource
+        homeView.collectionView.dataSource = self
+        
+        fetchMoviesNowPlaying()
+        fetchMoviesUpcoming()
+        fetchPopularMovies()
+        fetchTopRatedMovies()
+    }
+    
+    func fetchMoviesNowPlaying() {
         client.recommendMovies(from: .nowPlaying) { result in
             switch result {
-            case .success(let results):
-                self.first = results.results
+            case .success(let movies):
+                self.movies.append(movies.results)
+                self.sectionTitles.append("Now Playing")
             case .failure(let error):
                 print(error)
             }
         }
-        
+    }
+    
+    func fetchMoviesUpcoming() {
         client.recommendMovies(from: .upcoming) { result in
             switch result {
-            case .success(let results):
-                self.first = results.results
+            case .success(let movies):
+                self.movies.append(movies.results)
+                self.sectionTitles.append("Upcoming")
             case .failure(let error):
                 print(error)
             }
         }
-        
+    }
+    
+    func fetchPopularMovies() {
         client.recommendMovies(from: .popular) { result in
             switch result {
-            case .success(let results):
-                self.first = results.results
+            case .success(let movies):
+                self.movies.append(movies.results)
+                self.sectionTitles.append("Popular")
             case .failure(let error):
                 print(error)
             }
         }
-        
+    }
+    
+    func fetchTopRatedMovies() {
         client.recommendMovies(from: .topRated) { result in
             switch result {
-            case .success(let results):
-                self.first = results.results
-                self.homeView.collectionView.reloadData()
+            case .success(let movies):
+                self.movies.append(movies.results)
+                self.sectionTitles.append("Top Rated")
             case .failure(let error):
                 print(error)
             }
@@ -77,6 +86,24 @@ class HomeController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        
     }
 }
+
+extension HomeController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as! HomeCell
+        cell.data = movies[indexPath.row]
+        cell.setupSectionTitle(with: sectionTitles[indexPath.row])
+        cell.presentMovie = { movie in
+            let vc = MovieController()
+            vc.movie = movie
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return cell
+    }
+}
+

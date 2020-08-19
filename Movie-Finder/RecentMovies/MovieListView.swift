@@ -34,7 +34,7 @@ class MovieListView: UIView {
         addSubview(recentMoviesStackView)
     
         recentMoviesStackView.layout(using: [
-            recentMoviesStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            recentMoviesStackView.topAnchor.constraint(equalTo: topAnchor, constant: 60),
             recentMoviesStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
             recentMoviesStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             recentMoviesStackView.heightAnchor.constraint(equalToConstant: 50)
