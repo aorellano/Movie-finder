@@ -18,6 +18,13 @@ class MovieRecommendationView: UIView {
         label.textColor = UIColor.highlightColor
         return label
     }()
+    
+//    let filterIcon: UIImageView = {
+//        let image = UIImage(named: "filter")
+//        let imageView = UIImageView(image: image)
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
 
     let movieCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -44,6 +51,7 @@ class MovieRecommendationView: UIView {
         backgroundColor = UIColor.backgroundColor
         
         setupHeaderLabel()
+//        setupFilterIcon()
         setupCollectionView()
         setupButton()
     }
@@ -52,10 +60,18 @@ class MovieRecommendationView: UIView {
         addSubview(headerLabel)
         headerLabel.layout(using: [
             headerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 80),
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30)
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30)
+            
         ])
     }
+    
+//    func setupFilterIcon() {
+//        addSubview(filterIcon)
+//        filterIcon.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor).isActive = true
+//        filterIcon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30).isActive = true
+//        filterIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//        filterIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//    }
     
     func setupCollectionView() {
         addSubview(movieCollectionView)

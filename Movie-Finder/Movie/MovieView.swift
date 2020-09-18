@@ -9,7 +9,6 @@
 import UIKit
 import YoutubePlayer_in_WKWebView
 
-
 class MovieView: UIView {
     var playButton: UIButton = {
         let button = UIButton()
@@ -187,6 +186,7 @@ class MovieView: UIView {
         movieDescriptionView.plot.text = movie.overview
         var movieRating = "\((movie.vote_average ?? 0)/2.0)/5"
         movieDescriptionView.movieRating.text = movieRating
+        movieDescriptionView.movieYear.text = movie.release_date?.formatDate
         movieBackdrop.downloadImage(imageType: .backdrop, path: backdropPath)
     }
 

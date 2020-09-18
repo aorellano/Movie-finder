@@ -17,7 +17,8 @@ class HomeDataSource: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "categoryMovie", for: indexPath) as! MovieCell
-        cell.setup(movies[indexPath.row])
+        let movie = object(at: indexPath)
+        cell.setup(movie)
         return cell
     }
 }
@@ -25,5 +26,9 @@ class HomeDataSource: NSObject, UICollectionViewDataSource {
 extension HomeDataSource {
     func update(with movies: [Movie]) {
         self.movies = movies
+    }
+    
+    func object(at indexPath: IndexPath) -> Movie {
+        return movies[indexPath.row]
     }
 }

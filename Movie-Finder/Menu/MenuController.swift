@@ -78,7 +78,6 @@ class MenuController: UITableViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.largeTitleDisplayMode = .automatic
         navigationController?.navigationBar.sizeToFit()
-        
     }}
 
 

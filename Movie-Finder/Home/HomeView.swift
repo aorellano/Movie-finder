@@ -33,7 +33,6 @@ class HomeView: UIView {
     func setupCollectionView() {
         addSubview(collectionView)
         
-        
         collectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true

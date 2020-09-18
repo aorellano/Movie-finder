@@ -30,16 +30,25 @@ class SimilarMoviesController: UIViewController {
                 error.localizedDescription
             }
         }
+        similarMoviesView.shuffleButton.addTarget(self, action: #selector(shuffleButtonPressed), for: .touchUpInside)
+        
+    }
+    
+    @objc func shuffleButtonPressed() {
+        let vc = ShuffleController()
+        vc.similarMovieId = movieId
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func loadView() {
         view = similarMoviesView
     }
+    
+    
 }
 
 extension SimilarMoviesController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width/2.1), height: 300)
     }
-
 }

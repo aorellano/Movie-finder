@@ -42,7 +42,7 @@ class MovieDescriptionView: UIView {
     
     let movieYear: UILabel = {
         let label = UILabel()
-        label.text = "2020"
+        label.text = "Unknown"
         label.textColor = .white
         label.font = UIFont.collectionViewFont
         label.translatesAutoresizingMaskIntoConstraints = false

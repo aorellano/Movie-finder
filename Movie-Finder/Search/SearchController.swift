@@ -42,7 +42,6 @@ class SearchController: UICollectionViewController{
 
 extension SearchController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(dataSource.movies[indexPath.row])
         let vc = MovieController()
         vc.movie = dataSource.movies[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
@@ -56,7 +55,7 @@ extension SearchController: UICollectionViewDelegateFlowLayout {
 extension SearchController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        var searchText = searchBar.searchTextField.text!
+        let searchText = searchBar.searchTextField.text!
         client.recommendMovies(from: .search(movie: searchText)) { result in
             switch result {
             case .success(let result):

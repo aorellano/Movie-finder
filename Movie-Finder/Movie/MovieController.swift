@@ -55,13 +55,27 @@ class MovieController: UIViewController {
     }
     
     @objc func seenItButtonPressed() {
-        //MyMovieList.seenMovies.append(movie)
         MovieListFunctions.createSeenMovie(movie)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+            let ac = UIAlertController(title: "Added to Seen List!", message: nil, preferredStyle: .alert)
+            self.present(ac, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                ac.dismiss(animated: true)
+            }
+        }
     }
     
     @objc func watchItButtonPressed() {
-        //MyMovieList.watchMovies.append(movie)
         MovieListFunctions.createWatchMovie(movie)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+            let ac = UIAlertController(title: "Added to Watch List!", message: nil, preferredStyle: .alert)
+            self.present(ac, animated: true)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                ac.dismiss(animated: true)
+            }
+        }
     }
 
     override func loadView() {

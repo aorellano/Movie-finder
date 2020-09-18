@@ -13,6 +13,7 @@ class MovieRecommendationController: UIViewController {
     let dataSource = MoviesDataSource()
     var genre: String!
     let client = MovieClient()
+    var filter: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,17 @@ class MovieRecommendationController: UIViewController {
         movieRecommendationView.movieCollectionView.dataSource = dataSource
         movieRecommendationView.movieCollectionView.delegate = self
         movieRecommendationView.shuffleButton.addTarget(self, action: #selector(shuffleButtonPressed), for: .touchUpInside)
+       // let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(filterMovies))
+//        movieRecommendationView.filterIcon.addGestureRecognizer(tapGestureRecognizer)
+//        movieRecommendationView.filterIcon.isUserInteractionEnabled = true
+
     }
     
+//    @objc func filterMovies() {
+//        let vc = FilterController()
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+//
     func setupButtonTargets() {
          movieRecommendationView.movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: "yo")
     }
@@ -50,7 +60,6 @@ class MovieRecommendationController: UIViewController {
     
     @objc func shuffleButtonPressed() {
         let vc = ShuffleController()
-        print(genre)
         vc.genre = genre
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -61,7 +70,25 @@ class MovieRecommendationController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+//        if let filterName = filter {
+//            print(filterName)
+//            print(genre)
+//            client.recommendMovies(from: .discover(page: "1", genre: genre, sortedBy: filterName)) { result in
+//                switch result{
+//                case .success(let recommendations):
+//                    self.dataSource.update(with: recommendations.results)
+//                    self.movieRecommendationView.movieCollectionView.reloadData()
+//                    print(recommendations.results)
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//        }
+//                
         movieRecommendationView.movieCollectionView.reloadData()
+        navigationController?.navigationBar.isHidden = true
+        
     }
 }
 

@@ -15,4 +15,5 @@ struct Movie: Decodable, Equatable {
     var overview: String?
     var vote_average: Double?
     var backdrop_path: String?
+    var release_date: String?
 }
