@@ -13,6 +13,5 @@ class MovieList: Decodable {
     
     init(results: [Movie]) {
         self.results = results
-        print(results)
     }
 }

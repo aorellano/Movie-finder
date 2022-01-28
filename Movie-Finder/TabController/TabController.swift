@@ -14,7 +14,6 @@ class TabController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         self.delegate = self
-        
         self.tabBar.barTintColor = UIColor.backgroundColor
     }
     
@@ -30,13 +29,11 @@ class TabController: UITabBarController, UITabBarControllerDelegate {
         let tabTwo = SearchController(collectionViewLayout: layout)
         let tabTwoItem = UITabBarItem(title: "Search", image: UIImage(named: "search"), tag: 1)
         
-        let style = UITableView.Style.plain
+        let tabThree = MovieListController()
+        let tabThreeItem = UITabBarItem(title: "My Movies", image: UIImage(named: "film"), tag: 2)
         
-        let tabThree = MovieGenresController()
-        let tabThreeItem = UITabBarItem(title: "Movies", image: UIImage(named: "film"), tag: 2)
-        
-        let tabFour = MenuController(style: style)
-        let tabFourItem = UITabBarItem(title: "Account", image: UIImage(named: "person"), tag: 3)
+        let tabFour = MovieGenresController()
+        let tabFourItem = UITabBarItem(title: "Recommend", image: UIImage(named: "text.justify"), tag: 3)
         
         tabOne.tabBarItem = tabOneItem
         tabTwo.tabBarItem = tabTwoItem

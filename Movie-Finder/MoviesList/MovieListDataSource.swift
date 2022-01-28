@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieListDataSource: NSObject, UICollectionViewDataSource {
-    var data = [Movie]()
+    var data = [SavedMovie]()
     var watchList: Bool!
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
@@ -24,11 +24,11 @@ class MovieListDataSource: NSObject, UICollectionViewDataSource {
 }
 
 extension MovieListDataSource {
-    func update(with data: [Movie]) {
+    func update(with data: [SavedMovie]) {
         self.data = data
     }
     
-    func object(at indexPath: IndexPath) -> Movie {
+    func object(at indexPath: IndexPath) -> SavedMovie {
         return data[indexPath.row]
     }
 }

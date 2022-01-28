@@ -19,7 +19,6 @@ class MovieCell: UICollectionViewCell {
     
     func setup(_ data: Movie) {
         movieView.movieTitle.text = data.title
-        
         let posterPath = data.poster_path ?? ""
         movieView.moviePoster.downloadImage(imageType: .poster, path: posterPath)
     }

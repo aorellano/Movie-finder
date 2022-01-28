@@ -12,6 +12,7 @@ import TinyConstraints
 
 class MovieListCell: UICollectionViewCell {
     let movieCell = MovieCell()
+    var movie: SavedMovie!
     var cosmosView: CosmosView = {
         let view = CosmosView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -21,20 +22,27 @@ class MovieListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
-        
+        setupCosmos()
     }
     
-    func setup(_ data: Movie, _ watchList: Bool) {
+    func setupCosmos() {
+        cosmosView.didTouchCosmos = { rating in
+            self.movie.rating = Int16(rating)
+            CoreDataStack.shared.saveContext()
+        }
+    }
+    
+    func setup(_ data: SavedMovie, _ watchList: Bool) {
+        movie = data
         movieCell.movieView.movieTitle.text = data.title
         let posterPath = data.poster_path ?? ""
         movieCell.movieView.moviePoster.downloadImage(imageType: .poster, path: posterPath)
-        print(watchList)
         if watchList == true {
             cosmosView.isHidden = false
+            cosmosView.rating = Double(movie.rating)
         } else {
             cosmosView.isHidden = true
         }
-        
     }
     
     func setupCell() {
@@ -42,7 +50,6 @@ class MovieListCell: UICollectionViewCell {
         addSubview(cosmosView)
         
         movieCell.translatesAutoresizingMaskIntoConstraints = false
-        //movieCell.bottomAnchor.constraint(equalTo: cosmosView.topAnchor).isActive = true
         movieCell.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         movieCell.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         movieCell.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -52,8 +59,6 @@ class MovieListCell: UICollectionViewCell {
         cosmosView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         cosmosView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         cosmosView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        
-        
     }
     
     required init?(coder: NSCoder) {

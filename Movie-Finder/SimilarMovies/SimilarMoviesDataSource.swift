@@ -12,7 +12,6 @@ class SimilarMoviesDataSource: NSObject, UICollectionViewDataSource {
     var data = [Movie]()
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //print(data.count)
         return data.count
     }
         

@@ -8,10 +8,9 @@
 
 import Foundation
 
-class MovieListFunctions {
-    static func createWatchMovie(_ movie: Movie) {
+class MovieListManager {
+    static func createWatchMovie(_ movie: SavedMovie) {
         MyMovieList.watchMovies.append(movie)
-        
     }
     
     static func readWatchMovies() {
@@ -26,20 +25,12 @@ class MovieListFunctions {
         MyMovieList.watchMovies.remove(at: index)
     }
     
-    static func createSeenMovie(_ movie: Movie) {
+    static func createSeenMovie(_ movie: SavedMovie) {
             MyMovieList.seenMovies.append(movie)
     }
         
     static func readSeenMovies(completion: @escaping () -> ()) {
-            //An escaping closure is a closure thats called after the function it was passed to returns
-            //A non escaping closure is a closure thats called within the function it was passed int
-            //async your app wont wait for your code to finis. It'll continue on
-    //        DispatchQueue.global(qos: .userInteractive).async {
-    //
-    //        }
-    //        DispatchQueue.main.async {
-    //            completion()
-    //        }
+        
     }
         
     static func updateSeenMovie(_ movie: Movie) {

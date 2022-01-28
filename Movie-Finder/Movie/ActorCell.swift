@@ -57,8 +57,6 @@ class ActorCell: UICollectionViewCell {
         addSubview(actorTitle)
         
         actorTitle.topAnchor.constraint(equalTo: actorImage.bottomAnchor, constant: 5).isActive = true
-//        actorTitle.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-//        actorTitle.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         actorTitle.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     

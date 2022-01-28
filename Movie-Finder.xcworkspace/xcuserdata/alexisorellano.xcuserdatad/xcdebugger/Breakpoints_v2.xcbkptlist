@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4F69B059-7344-4162-BE29-82CADA9EABEC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie-Finder/Movie/MovieController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "playTrailer()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "57906158-4A0F-4312-B916-0E553D6FDA82"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -52,7 +36,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - ab04f31a0a4c2c0d"
+                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - 81020f544372657b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -67,7 +51,7 @@
                   offsetFromSymbolStart = "738">
                </Location>
                <Location
-                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - 9e301d0ca8746591"
+                  uuid = "03CE44B1-DDCF-4166-B63B-C9F8647A25F7 - b436e142e14a2ca9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -100,7 +84,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - 9e301d0ca8746591"
+                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - b436e142e14a2ca9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -115,7 +99,7 @@
                   offsetFromSymbolStart = "161">
                </Location>
                <Location
-                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - 9e301d0ca8746591"
+                  uuid = "2CCFADB1-F58C-405A-AFC4-EC9FC273F081 - b436e142e14a2ca9"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -158,8 +142,8 @@
             filePath = "Movie-Finder/Filtering/FilterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,41 +158,9 @@
             filePath = "Movie-Finder/Filtering/FilterController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C9439ABC-A8B3-40A3-8D7D-438180EA2EF7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie-Finder/MovieRecommendations/MovieRecommendationController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2A59E423-2AD2-4FD4-9C59-BDA341B27901"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie-Finder/MovieRecommendations/MovieRecommendationController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

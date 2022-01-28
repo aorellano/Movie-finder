@@ -9,6 +9,6 @@
 import UIKit
 
 class MyMovieList {
-    static var watchMovies = [Movie]()
-    static var seenMovies = [Movie]()
+    static var watchMovies = [SavedMovie]()
+    static var seenMovies = [SavedMovie]()
 }

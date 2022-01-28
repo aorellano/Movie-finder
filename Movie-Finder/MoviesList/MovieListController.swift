@@ -7,36 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieListController: UIViewController {
     let movieListView = MovieListView()
     let dataSource = MovieListDataSource()
-//    let client = MovieClient()
-    
+    let movieFetch: NSFetchRequest<SavedMovie> = SavedMovie.fetchRequest()
+    lazy var seenPredicate: NSPredicate = {
+        return NSPredicate(format: "seen = %@",
+            NSNumber(value: true))
+    }()
+    lazy var watchPredicate: NSPredicate = {
+        return NSPredicate(format: "seen == %@",
+            NSNumber(value: false))
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.title = "Tab 1"
+        setupActions()
+        fetchAndReloadMovies(with: watchPredicate)
+    }
+    
+    func setupActions() {
         movieListView.movieListCollectionView.dataSource = dataSource
-//        recentMoviesView.recentMoviesCollectionView.delegate = self
-//
+        movieListView.movieListCollectionView.delegate = self
         movieListView.recentMoviesStackView.watchListButton.addTarget(self, action: #selector(watchListButtonPressed), for: .touchUpInside)
         movieListView.recentMoviesStackView.seenListButton.addTarget(self, action: #selector(seenListButtonPressed), for: .touchUpInside)
-        
-        dataSource.update(with: MyMovieList.watchMovies)
         dataSource.watchList = false
-        movieListView.movieListCollectionView.reloadData()
-        movieListView.movieListCollectionView.delegate = self
-//
-//        client.recommendMovies(from: .nowPlaying) { result in
-//            switch result {
-//            case .success(let results):
-//                self.dataSource.update(with: results.results)
-//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
     }
     
     @objc func watchListButtonPressed() {
@@ -44,37 +42,25 @@ class MovieListController: UIViewController {
         dataSource.update(with:  MyMovieList.watchMovies)
         movieListView.movieListCollectionView.reloadData()
         dataSource.watchList = false
-        //send datasource array of movies you want to watch
-        
-//        client.recommendMovies(from: .nowPlaying) { result in
-//            switch result {
-//            case .success(let results):
-//                self.dataSource.update(with: results.results)
-//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        print("hi")
+        fetchAndReloadMovies(with: watchPredicate)
+    }
+    
+    func fetchAndReloadMovies(with predicate: NSPredicate) {
+      do {
+          movieFetch.resultType = .managedObjectResultType
+          movieFetch.predicate = predicate
+          MyMovieList.watchMovies = try CoreDataStack.shared.managedContext.fetch(movieFetch)
+          dataSource.update(with: MyMovieList.watchMovies)
+          movieListView.movieListCollectionView.reloadData()
+      } catch let error as NSError {
+        print("Could not fetch \(error), \(error.userInfo)")
+      }
     }
     
     @objc func seenListButtonPressed() {
         buttonPressed(button: movieListView.recentMoviesStackView.seenListButton)
-        dataSource.update(with: MyMovieList.seenMovies)
-        movieListView.movieListCollectionView.reloadData()
         dataSource.watchList = true
-        //send datasource array of movie you have seen
-//        client.recommendMovies(from: .upcoming) { result in
-//            switch result {
-//            case .success(let results):
-//                self.dataSource.update(with: results.results)
-//                self.recentMoviesView.recentMoviesCollectionView.reloadData()
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-     
-        print("yo")
+        fetchAndReloadMovies(with: seenPredicate)
     }
     
     func buttonPressed(button: UIButton) {
@@ -101,17 +87,14 @@ class MovieListController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         movieListView.recentMoviesStackView.secondUnderline.isHidden = true
-        
     }
     
-
     override func loadView() {
         view = movieListView
     }
 }
 
 extension MovieListController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width/2.1), height: 300)
     }

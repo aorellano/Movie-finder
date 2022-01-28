@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-//@objc(Movie)
-//public class Movie: NSManagedObject {
-//
-//}
+@objc(SavedMovie)
+public class SavedMovie: NSManagedObject {
+
+}

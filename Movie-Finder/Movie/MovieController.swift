@@ -8,42 +8,37 @@
 
 import UIKit
 import YoutubePlayer_in_WKWebView
+import CoreData
 
 class MovieController: UIViewController {
     let movieView = MovieView()
     var movie: Movie!
+    var savedMovie: SavedMovie!
     var client = MovieClient()
     var dataSource = ActorsDataSource()
     var listDataSource = MovieListDataSource()
+    let movieFetch: NSFetchRequest<SavedMovie> = SavedMovie.fetchRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         movieView.actorsCollectionView.dataSource = dataSource
-        movieView.setup(movie)
-        print(movie.title)
-        
-
-         movieView.playButton.addTarget(self, action: #selector(playTrailer), for: .touchUpInside)
-        movieView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
-        
-        movieView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
-        
-       
-        
         movieView.playerView.delegate = self
+        movieView.setup(movie)
+        setupActions()
+    }
+    
+    func setupActions() {
+        movieView.playButton.addTarget(self, action: #selector(playTrailer), for: .touchUpInside)
+        movieView.seenItListButton.addTarget(self, action: #selector(seenItButtonPressed), for: .touchUpInside)
+        movieView.watchListButton.addTarget(self, action: #selector(watchItButtonPressed), for: .touchUpInside)
         movieView.movieDescriptionView.similarMoviesButton.addTarget(self, action: #selector(findSimilarMovies), for: .touchUpInside)
-       // movieView.playerView.load(withVideoId: <#T##String#>)
-       // movieView.playerView.webView(<#T##webView: WKWebView##WKWebView#>, didFinish: <#T##WKNavigation!#>)
-
     }
     
     @objc func playTrailer() {
-        print("hi")
         client.getVideo(from: .video(movieId: String(movie.id))) { result in
             switch result {
             case .success(let results):
-                print(results.results ?? "")
                 let videoKey = results.results.first?.key ?? ""
                 self.movieView.playerView.isHidden = false
                 self.movieView.playerView.load(withVideoId: videoKey)
@@ -51,13 +46,27 @@ class MovieController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-
     }
     
     @objc func seenItButtonPressed() {
-        MovieListFunctions.createSeenMovie(movie)
+        save(movie)
+        savedMovie.seen = true
+        MovieListManager.createSeenMovie(savedMovie)
+        CoreDataStack.shared.saveContext()
+        
+        showAlert(with: "Added to Seen List!")
+    }
+    
+    @objc func watchItButtonPressed() {
+        save(movie)
+        savedMovie.seen = false
+        CoreDataStack.shared.saveContext()
+        showAlert(with: "Added to Watch List!")
+    }
+    
+    func showAlert(with message: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
-            let ac = UIAlertController(title: "Added to Seen List!", message: nil, preferredStyle: .alert)
+            let ac = UIAlertController(title: message, message: nil, preferredStyle: .alert)
             self.present(ac, animated: true)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -66,21 +75,20 @@ class MovieController: UIViewController {
         }
     }
     
-    @objc func watchItButtonPressed() {
-        MovieListFunctions.createWatchMovie(movie)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
-            let ac = UIAlertController(title: "Added to Watch List!", message: nil, preferredStyle: .alert)
-            self.present(ac, animated: true)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                ac.dismiss(animated: true)
-            }
-        }
+    func save(_ movie: Movie) {
+        savedMovie = SavedMovie(context: CoreDataStack.shared.managedContext)
+        savedMovie.title = movie.title
+        savedMovie.id = Int32(movie.id)
+        savedMovie.backdrop_path = movie.backdrop_path
+        savedMovie.poster_path = movie.poster_path
+        savedMovie.overview = movie.overview
+        savedMovie.release_date = movie.release_date
+        savedMovie.vote_average = movie.vote_average!
+        savedMovie.rating = 0
     }
 
     override func loadView() {
         view = movieView
-        
     }
     
     @objc func findSimilarMovies() {
@@ -105,14 +113,12 @@ class MovieController: UIViewController {
         }
         movieView.actorsCollectionView.reloadData()
     }
-
 }
 
 extension MovieController: WKYTPlayerViewDelegate {
     func playerView(_ playerView: WKYTPlayerView, didChangeTo state: WKYTPlayerState) {
-        if state == .paused || state == .ended {
+        if state == .ended {
             movieView.playerView.isHidden = true
         }
     }
-    
 }
